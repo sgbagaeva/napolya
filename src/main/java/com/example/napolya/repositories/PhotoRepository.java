@@ -1,2 +1,7 @@
-package com.example.napolya.repositories;public class PhotoRepository {
+package com.example.napolya.repositories;
+
+import com.example.napolya.models.Photo;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PhotoRepository extends JpaRepository<Photo, Integer> {
 }

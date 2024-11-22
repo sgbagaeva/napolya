@@ -5,7 +5,7 @@ info:
   description: Все необходимые API для сайта На_поля
   
 tags:
-  - name: NoEssence # Методы, не относящиеся ни к одной сущности
+  - name: Photo # Фотография
   - name: Player # Игрок
   - name: Field # Поле
   - name: Game # Игра
@@ -18,7 +18,7 @@ paths:
   /photos:
     get:
       tags:
-        - NoEssence
+        - Photo
       summary: Получение списка фотографий
       description: Возвращает список фотографий для отображения на главной странице.
       responses:
@@ -847,7 +847,7 @@ components:
         email:
           type: string
           nullable: true
-          example: "Багаева"
+          example: "sveta@gmail.com"
         password:
           type: string
           description: Пароль игрока

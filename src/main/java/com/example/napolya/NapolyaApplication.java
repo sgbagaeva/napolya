@@ -8,6 +8,7 @@ public class NapolyaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(NapolyaApplication.class, args);
+		System.out.println("Spring");
 	}
 
 }

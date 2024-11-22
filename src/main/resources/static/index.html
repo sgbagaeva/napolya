@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, inital-scale=1.0">
     <title>Na polya</title>
-    <!-- <link rel="icon" href="C:/GitHub/napolya/src/main/resources/static/elements/spb4you.ico" type="image/x-icon"> -->
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" href="elements/spb4you.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
     </head>
     <body>
-        <div id="container">
+        <div id="container" class="flex-column">
 
         <section id="main" class="flex-column">
 
@@ -23,28 +25,29 @@
                 </a>
 
                 <ul class="navigation flex-row">
-                    <li><a href="index.html#welcome">о приложении</a></li>
-                    <li><a href="index.html#poitsAndRoutes">записаться на игру</a></li>
-                    <li><a href="index.html#recommendations">фотографии</a></li>
+                    <li><a href="index.html#signUpForGame">записаться на игру</a></li>
+                    <li><a href="index.html#photos">фотографии</a></li>
                     <li><a href="index.html#footer">контакты</a></li>
-                    <!-- <li><a href="registration.html">войти</a></li> -->
+                    <li><a href="registration.html">войти</a></li>
                 </ul>
 
                 <a href="login.html">
-                    <img id="loginIcon icon" src="elements/loginIcon.svg">
+                    <img id="loginIcon icon" src="elements/searchIcon.svg">
                 </a>
             </div>
 
             <div id="mainInfoWrapper" class="flex-row">
-
-                <div id="mainTextWrapper">
+		
+                <div id="mainTextWrapper" class="flex-column">
                     <p id="mainHeadlineText">НА ПОЛЯ!</p>
-                    <p id="mainDescText">Присоединяйтесь к нашему сообществу игроков!
-                        Выбирайте поля и записывайтесь в команды!</p>
-                    <p id="toGamesBtn">К локациям и маршрутам!</p>
+                    <div id="mainDescAndBtnWrapper" class="flex-column">
+                        <p id="mainDescText">Присоединяйтесь к нашему <br>сообществу игроков!
+                            <br>Выбирайте поля и <br>записывайтесь в команды! </p>
+                        <p id="signUpForGameBtn">записаться на игру!</p>
+                    </div>
                 </div>
-
-                <img id="mainPhoto" src="elements/mainPhoto.png">
+            
+                <img id="mainPhoto" src="elements/mainPhoto.png"></img>
             </div>
 
         </section>
@@ -61,23 +64,22 @@
 
         </section>
 
-        <footer class="flex-column">
-
-            <ul class="navigation flex-row">
-                <li><a href="index.html#welcome">о приложении</a></li>
-                <li><a href="index.html#poitsAndRoutes">записаться на игру</a></li>
-                <li><a href="index.html#recommendations">фотографии</a></li>
+        <section id="footer" class="flex-column">
+		
+			<ul class="navigation flex-row">
+                <li><a href="index.html#signUpForGame">записаться на игру</a></li>
+                <li><a href="index.html#photos">фотографии</a></li>
                 <li><a href="index.html#footer">контакты</a></li>
-                <!-- <li><a href="registration.html">войти</a></li> -->
-            </ul>
-
-
-            <div id="socialMediaWrapper">
+                <li><a href="registration.html">войти</a></li>
+            </ul>	
+		
+		
+            <div id="socialMediaWrapper"> 
                 <img class="socialMediaIcon icon" src="elements/telegramIcon.svg"> </img>
                 <img class="socialMediaIcon icon" src="elements/VKIcon.svg"> </img>
                 <img class="socialMediaIcon icon" src="elements/mailIcon.svg"> </img>
             </div>
-
+            
             <a href="index.html" >
                     <img class="logoIcon icon" src="elements/logo.svg"></img>
             </a>
