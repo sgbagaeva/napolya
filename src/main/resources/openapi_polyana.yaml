@@ -1,0 +1,97 @@
+openapi: 3.0.3
+info:
+  title: API for integration with polyana website 3.0
+  version: 1.0.11
+
+
+paths:
+  /login:
+    post:
+      summary: Log in to receive user ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: 
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                  example: "Юра"
+                password:
+                  type: string
+                  example: "pupupu"
+      responses:
+        '200':
+          description: Successful login, user ID returned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 12345678
+        '401':
+          description: Invalid input data
+        '400':
+          description: Bad request (for example, missing smth)
+
+  /players/{player_id}:
+    get:
+      summary: Get player data by ID
+      parameters:
+        - name: player_id
+          in: path
+          required: true
+          description: ID of the player
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Player data successfully retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    example: "Я"
+                  rating:
+                    type: integer
+                    example: 20
+        '404':
+          description: Player not found 
+          
+  /providers/{provider_id}/playersVisibility:
+    get:
+      summary: Get the ability to view the players in the game for the fields of a specific provider
+      parameters:
+        - name: provider_id
+          in: path
+          required: true
+          description: ID of the provider managing visibility
+          schema:
+            type: integer
+
+      responses:
+        '200':
+          description: Successfully retrieved visibility setting for players
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  allowView:
+                    type: boolean
+                    example: true  # Указывает, разрешена ли видимость игроков, записанных на игру
+        '404':
+          description: Provider not found
+        '400':
+          description: Bad request (for example, invalid provider ID or absence of allowView)
+
+                  

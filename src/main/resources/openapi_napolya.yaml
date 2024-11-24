@@ -1,0 +1,1079 @@
+openapi: 3.0.3
+info:
+  title: API na_polya 3.0
+  version: 1.0.11
+  description: Все необходимые API для сайта На_поля
+  
+tags:
+  - name: Photo # Фотография
+  - name: Player # Игрок
+  - name: Field # Поле
+  - name: Game # Игра
+  - name: Team # Команда
+  - name: Queue # Очередь
+  - name: Provider # Провайдер
+  - name: Notification # Уведомление
+    
+paths:
+  /photos:
+    get:
+      tags:
+        - Photo
+      summary: Получение списка фотографий
+      description: Возвращает список фотографий для отображения на главной странице.
+      responses:
+        '200':
+          description: Успешный ответ с списком фотографий
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    url:
+                      type: string
+                      format: uri
+                      example: "https://example.com/photo1.jpg"
+                    created_at:
+                      type: string
+                      format: date-time
+                      example: "2024-04-01T15:00:00Z"
+                    description:
+                      type: string
+                      example: "Описание фотографии"
+
+  /players/register:
+    post:
+      tags:
+        - Player
+      summary: Регистрация нового игрока
+      description: Позволяет новому пользователю зарегистрироваться в системе.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: "Света"
+                surname:
+                  type: string
+                  description: Фамилия игрока
+                  nullable: true
+                  example: "Багаева"
+                email:
+                  type: string
+                  description: Электронная почта игрока
+                  nullable: true
+                  example: "sveta@gmail.com"
+                password:
+                  type: string
+                  writeOnly: true
+                  example: "666#999"
+              required:  # Обязательные поля
+                - username
+                - password
+      responses:
+        '201':
+          description: Успешная регистрация
+        '400':
+          description: Ошибка валидации данных
+
+  /players/login:
+    post:
+      tags:
+        - Player
+      summary: Авторизация пользователя
+      description: Авторизует пользователя и перенаправляет на соответствующую главную страницу.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Света"
+                password:
+                  type: string
+                  example: "666#999"
+              required:  # Обязательные поля
+                - username
+                - password
+      responses:
+        '200':
+          description: Успешная авторизация
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: "jwt-token"
+                  role:
+                    type: string
+                    enum: [player, captian, admin]
+                    example: "admin"
+        '401':
+          description: Неверные учетные данные
+          
+  /players:
+    get:
+      tags:
+        - Player
+      summary: Получить список игроков
+      responses:
+        '200':
+          description: Успешный ответ с массивом имён игроков
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  description: Список имён всех игроков
+                  example: ["Света", "Георгий","Юра","Витя"]
+    post:
+      tags:
+        - Player
+      summary: Создать нового игрока
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Player'
+      responses:
+        '201':
+          description: Игрок успешно создан
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+                
+  /players/{id}:
+    get:
+      tags:
+        - Player
+      summary: Получить информацию об игроке
+      description: Возвращает данные об игроке по id.
+      operationId: getPlayerById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Уникальный идентификатор игрока
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Успешное получение информации об игроке
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+        '404':
+          description: Игрок не найден
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Игрок не найден"
+        '500':
+          description: Ошибка сервера
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Внутренняя ошибка сервера"
+    put:
+      tags:
+        - Player
+      summary: Обновить информацию об игроке
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID игрока
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Player'
+      responses:
+        '200':
+          description: Игрок успешно обновлён
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+        '404':
+          description: Игрок не найден
+    
+    delete:
+      tags:
+        - Player
+      summary: Удалить игрока
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID игрока
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Игрок успешно удалён
+        '404':
+          description: Игрок не найден 
+          
+  /fields:
+    get:
+      tags:
+        - Field
+      summary: Получить список названий полей
+      responses:
+        '200':
+          description: Успешный ответ с массивом названий полей
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  description: Список названий полей
+                  example: ["Арена Спорта", "Поле В11"]
+                  
+  /fields/{id}:
+    get:
+      tags:
+        - Field
+      summary: Получить информацию о поле
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID поля
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Информация о поле
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Field'
+        '404':
+          description: Поле не найдено
+
+    put:
+      tags:
+        - Field
+      summary: Обновить информацию о поле
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID поля
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Field'
+      responses:
+        '200':
+          description: Поле успешно обновлено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Field'
+        '404':
+          description: Поле не найдено
+  
+    delete:
+      tags:
+        - Field
+      summary: Удалить поле
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID поля
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Поле успешно удалено
+        '404':
+          description: Поле не найдено
+          
+  /games:
+    get:
+      tags:
+        - Game
+      summary: Получить список названий игр
+      responses:
+        '200':
+          description: Успешный ответ с массивом названий игр
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  description: Список названий игр
+                  example: ["Мега супер игра", "Кубок Полей"]
+    post:
+      tags:
+        - Game
+      summary: Создать новую игру
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Game'
+      responses:
+        '201':
+          description: Игра успешно создана
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+
+  /games/{id}:
+    get:
+      tags:
+        - Game
+      summary: Получить информацию об игре
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID игры
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Информация об игре
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        '404':
+          description: Игра не найдена
+
+    put:
+      tags:
+        - Game
+      summary: Обновить информацию об игре
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID игры
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Game'
+      responses:
+        '200':
+          description: Игра успешно обновлена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        '404':
+          description: Игра не найдена
+    
+    delete:
+      tags:
+        - Game
+      summary: Удалить игру
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID игры
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Игра успешно удалена
+        '404':
+          description: Игра не найдена
+    
+  /teams:
+    get:
+      tags:
+        - Team
+      summary: Получить список названий команд
+      responses:
+        '200':
+          description: Успешный ответ с массивом названий команд
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  description: Список названий команд
+                  example: ["Команда Победителей", "Лига Атлетов"]
+    post:
+      tags:
+        - Team
+      summary: Создать новую команду
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Team'
+      responses:
+        '201':
+          description: Команда успешно создана
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+
+  /teams/{id}:
+    get:
+      tags:
+        - Team
+      summary: Получить информацию о команде
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID команды
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Информация о команде
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+        '404':
+          description: Команда не найдена
+
+    put:
+      tags:
+        - Team
+      summary: Обновить информацию о команде
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID команды
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Team'
+      responses:
+        '200':
+          description: Команда успешно обновлена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+        '404':
+          description: Команда не найдена
+    
+    delete:
+      tags:
+        - Team
+      summary: Удалить команду
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID команды
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Команда успешно удалена
+        '404':
+          description: Команда не найдена
+          
+  /queues:
+    get:
+      tags:
+        - Queue
+      summary: Получить список id очередей
+      responses:
+        '200':
+          description: Успешный ответ с массивом id очередей
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: integer
+                  description: Список id очередей
+                  example: [1, 2, 3]
+    post:
+      tags:
+        - Queue
+      summary: Создать новую очередь
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Queue'
+      responses:
+        '201':
+          description: Очередь успешно создана
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Queue'
+
+  /queues/{id}:
+    get:
+      tags:
+        - Queue
+      summary: Получить информацию об очереди
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID очереди
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Информация об очереди
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Queue'
+        '404':
+          description: Очередь не найдена
+
+    put:
+      tags:
+        - Queue
+      summary: Обновить информацию об очереди
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID очереди
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Queue'
+      responses:
+        '200':
+          description: Очередь успешно обновлена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Queue'
+        '404':
+          description: Очередь не найдена
+    
+    delete:
+      tags:
+        - Queue
+      summary: Удалить очередь
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID очереди
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Очередь успешно удалена
+        '404':
+          description: Очередь не найдена
+
+  /providers:
+    get:
+      tags:
+        - Provider
+      summary: Получить список названий провайдеров
+      responses:
+        '200':
+          description: Успешный ответ с массивом названий провайдеров
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  description: Список названий провайдеров
+                  example: ["Поляна", "Интерспорт"]
+    post:
+      tags:
+        - Provider
+      summary: Создать нового провайдера
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Provider'
+      responses:
+        '201':
+          description: Провайдер успешно создан
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Provider'
+
+  /providers/{id}:
+    get:
+      tags:
+        - Provider
+      summary: Получить информацию о провайдере
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID провайдера
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Информация о провайдере
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Provider'
+        '404':
+          description: Провайдер не найден
+
+    put:
+      tags:
+        - Provider
+      summary: Обновить информацию о провайдере
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID провайдера
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Provider'
+      responses:
+        '200':
+          description: Провайдер успешно обновлён
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Provider'
+        '404':
+          description: Провайдер не найден
+    
+    delete:
+      tags:
+        - Provider
+      summary: Удалить провайдера
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID провайдера
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Провайдер успешно удалён
+        '404':
+          description: Провайдер не найден
+
+  /notifications:
+    get:
+      tags:
+        - Notification
+      summary: Получить список id уведомлений
+      responses:
+        '200':
+          description: Успешный ответ с массивом id уведомлений
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: integer
+                  description: Список id уведомлений
+                  example: [1, 2]
+    post:
+      tags:
+        - Notification
+      summary: Создать новое уведомление
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Notification'
+      responses:
+        '201':
+          description: Уведомление успешно создано
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notification'
+
+  /notifications/{id}:
+    get:
+      tags:
+        - Notification
+      summary: Получить информацию об уведомлении
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID уведомления
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Информация об уведомлении
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notification'
+        '404':
+          description: Уведомление не найдено
+
+    put:
+      tags:
+        - Notification
+      summary: Обновить информацию об уведомлении
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID уведомления
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Notification'
+      responses:
+        '200':
+          description: Уведомление успешно обновлено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notification'
+        '404':
+          description: Уведомление не найдено
+    
+    delete:
+      tags:
+        - Notification
+      summary: Удалить уведомление
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID уведомления
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Уведомление успешно удалено
+        '404':
+          description: Уведомление не найдено
+          
+components:
+  schemas:
+    Player:  # Определение сущности "Игрок"
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Уникальный идентификатор игрока
+          example: 1234
+        name:
+          type: string
+          description: Имя игрока
+          example: "Света"
+        surname:
+          type: string
+          nullable: true
+          example: "Багаева"
+        email:
+          type: string
+          nullable: true
+          example: "sveta@gmail.com"
+        password:
+          type: string
+          description: Пароль игрока
+          writeOnly: true
+          example: "666#999"
+        role:
+          type: string
+          description: Роль игрока
+          example: "Игрок"
+        registration_date:
+          type: string
+          format: date-time
+          example: "2024-01-01T12:00:00Z"
+        rating:
+          type: integer
+          description: Рейтинг игрока
+          example: 12
+        games_ids:
+          type: array
+          items:
+            type: integer
+          description: Список id игр, на которые записан игрок
+          example: [2, 5, 7]
+        entries_amount:
+          type: integer
+          description: Количество записей на игры
+          example: 3
+
+    Field:  # Определение сущности "Поле"
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Уникальный идентификатор поля
+          example: 1
+        name:
+          type: string
+          description: Название поля
+          example: "Арена Спорта"
+        description:
+          type: string
+          description: Описание поля
+          example: "Большой стадион с искусственным покрытием для футбольных матчей."
+        location:
+          type: string
+          description: Местоположение поля
+          example: "ул. Спортивная, д. 1, г. Санкт-Петербург"
+        provider_id:
+          type: integer
+          description: id провайдера поля
+          example: 2
+        games_ids:
+          type: array
+          description: id игр, проводимых на этом поле
+          items:
+            type: integer
+          example: [101, 102, 103]
+      required:
+        - id
+        - name
+        - location
+        - provider_id
+    
+    Game: # Определение сущности "Игра"
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Уникальный идентификатор игры
+          example: 1
+        name:
+          type: string
+          description: Название игры
+          example: "Мега супер игра"
+        description:
+          type: string
+          description: Описание игры
+          example: "Друзья сыграют в дружеском матче в эту субботу."
+        start_date:
+          type: string
+          description: Дата и время начала игры
+          format: date-time
+          example: "2024-11-16T15:00:00Z"
+        status:
+          type: string
+          description: Статус игры
+          enum: [ожидание, активная, завершена, запись закрыта]
+          example: "ожидание"
+        creator_id:
+          type: integer
+          description: id администратора, создавшего игру
+          example: 2
+        field_id:
+          type: integer
+          description: id поля, на котором будет проводиться игра
+          example: 1
+        teams_ids:
+          type: array
+          description: id команд, участвующих в игре
+          items:
+            type: integer
+          example: [10, 11]
+        queue_id:
+          type: integer
+          description: id очереди на игру
+          example: 1
+
+      required:
+        - id
+        - name
+        - start_date
+        - creator_id
+        - field_id
+        
+    Team: # Определение сущности "Команда"
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Уникальный идентификатор команды
+          example: 1
+        name:
+          type: string
+          description: Название команды
+          example: "Команда Победителей"
+        players_ids:
+          type: array
+          description: id игроков, входящих в состав команды
+          items:
+            type: integer
+          example: [2, 3, 4]
+        game_id:
+          type: integer
+          description: id игры, в которой участвует команда
+          example: 1
+        captain_id:
+          type: integer
+          description: id капитана команды
+          example: 2
+      
+      required:
+        - id
+        - name
+        - game_id
+        - captain_id
+      
+    Queue: # Определение сущности "Очередь"
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Уникальный идентификатор очереди
+          example: 1
+        players_ids:
+          type: array
+          description: id игроков, находящихся в очереди
+          items:
+            type: integer
+          example: [5, 6, 7]
+        game_id:
+          type: integer
+          description: id игры, на которую стоит очередь
+          example: 1
+
+      required:
+        - id
+        - players_ids
+        - game_id
+        
+    Provider: # Определение сущности "Провайдер"
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Уникальный идентификатор провайдера
+          example: 1
+        name:
+          type: string
+          description: Название провайдера
+          example: "Поляна"
+        fields_ids:
+          type: array
+          description: id полей, которые предоставляет провайдер
+          items:
+            type: integer
+          example: [1, 2, 3]
+      
+      required:
+        - id
+        - name
+        
+    Notification: # Определение сущности "Уведомление"
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Уникальный идентификатор уведомления
+          example: 1
+        text:
+          type: string
+          description: Текст уведомления
+          example: "Вы записаны в команду A!"
+        type:
+          type: string
+          description: Тип уведомления
+          # Написать список возможных типов
+          example: "уведомление о составе команды"
+        recipient_id:
+          type: integer
+          description: id получателя уведомления
+          example: 2
+        status:
+          type: string
+          description: Статус уведомления
+          enum: [непрочитанное, прочитанное]
+          example: "непрочитанное"
+        date:
+          type: string
+          description: Дата и время отправки уведомления
+          format: date-time
+          example: "2024-11-16T10:00:00Z"
+
+      required:
+        - id
+        - text
+        - type
+        - recipient_id
+        - status
+        - date
