@@ -26,6 +26,8 @@ import java.util.Objects;
 @Table(name = "games")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-11-22T19:51:05.893207800+03:00[Europe/Moscow]")
 public class Game   {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @JsonProperty("id")
   private Integer id;
 
