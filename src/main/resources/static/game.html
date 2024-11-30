@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style-game.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="js/script.js"></script>
+
+    <title>Макет Игры</title>
+</head>
+
+<body>
+
+    <div class="game-layout">
+
+        <button class="back-btn">← Назад</button> 
+
+        <div class="edit-block">
+            <button class="btn rectangle-112"><span class="edit-text">Редактировать</span></button>
+            <button class="btn rectangle-113"><span class="save-text">Сохранить изменения</span></button>
+        </div>
+
+        <div class="game-title">Игра...</div>
+
+        <div class="content-container">
+           
+            <div class="line-15"></div>
+
+            <div class="description-block">
+                Здесь будет текст описания игры. Этот текст может увеличиваться, и синяя линия будет соответствовать его высоте.
+            </div>
+        </div>
+
+        <div class="additional-info-block">Блок с дополнительной информацией</div>
+
+        <div class="game-images">
+            <div class="game-image" style="background-image: url('14058.jpg');"></div>
+            <div class="game-image" style="background-image: url('28378.jpg');"></div>
+            <div class="game-image" style="background-image: url('27355.jpg');"></div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            var descriptionHeight = $('.description-block').outerHeight();
+            $('.line-15').height(descriptionHeight);
+        });
+    </script>
+</body>
+
+</html>
