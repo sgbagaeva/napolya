@@ -1,0 +1,75 @@
+openapi: 3.0.3
+
+info:
+  title: API for integration with polyana website 3.0
+  version: 1.0.11
+
+paths:
+  /login:
+    post:
+      summary: По логину и паролю получить ID игрока
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: 
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                  example: "Юра"
+                password:
+                  type: string
+                  example: "pupupu"
+      responses:
+        '200':
+          description: Успешный вход в систему, возвращен ID игрока
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 12345678
+        '401':
+          description: Неправильные входные данные 
+        '400':
+          description: Неверный запрос (например, что-то пропущено)
+
+  /getPlayerData:
+    post:
+      summary: Получить данные об игроке (имя, рейтинг) по ID из тела запроса
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  type: integer
+                  example: 12345678
+      responses:
+        '200':
+          description: Успешное получение данных игрока
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    example: "Я"
+                  rating:
+                    type: integer
+                    example: 20
+        '404':
+          description: Игрок не найден
+
+
