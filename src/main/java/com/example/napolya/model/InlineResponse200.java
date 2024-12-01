@@ -1,11 +1,7 @@
 package com.example.napolya.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModelProperty;
 import jakarta.annotation.Generated;
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
-import jakarta.validation.Valid;
 
 import java.net.URI;
 import java.time.LocalDateTime;
@@ -38,7 +34,6 @@ public class InlineResponse200   {
    * Get id
    * @return id
   */
-  @ApiModelProperty(example = "1", value = "")
 
 
   public Integer getId() {
@@ -58,9 +53,6 @@ public class InlineResponse200   {
    * Get url
    * @return url
   */
-  @ApiModelProperty(example = "https://example.com/photo1.jpg", value = "")
-
-  @Valid
 
   public URI getUrl() {
     return url;
@@ -79,9 +71,6 @@ public class InlineResponse200   {
    * Get createdAt
    * @return createdAt
   */
-  @ApiModelProperty(example = "2024-04-01T15:00Z", value = "")
-
-  @Valid
 
   public LocalDateTime getCreatedAt() {
     return createdAt;
@@ -100,7 +89,6 @@ public class InlineResponse200   {
    * Get description
    * @return description
   */
-  @ApiModelProperty(example = "Описание фотографии", value = "")
 
 
   public String getDescription() {

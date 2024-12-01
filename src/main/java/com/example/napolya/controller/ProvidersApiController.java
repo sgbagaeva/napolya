@@ -5,9 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.NativeWebRequest;
 import java.util.Optional;
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-11-22T19:51:05.893207800+03:00[Europe/Moscow]")
 @Controller
-@RequestMapping("${openapi.aPINaPolya30.base-path:}")
 public class ProvidersApiController implements ProvidersApi {
 
     private final NativeWebRequest request;

@@ -3,7 +3,6 @@ package com.example.napolya.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.swagger.annotations.ApiModelProperty;
 import jakarta.annotation.Generated;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
@@ -12,8 +11,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.Valid;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +21,6 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "games")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-11-22T19:51:05.893207800+03:00[Europe/Moscow]")
 public class Game   {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -87,7 +83,6 @@ public class Game   {
   private Integer fieldId;
 
   @JsonProperty("teams_ids")
-  @Valid
   private List<Integer> teamsIds = null;
 
   @JsonProperty("queue_id")
@@ -102,7 +97,6 @@ public class Game   {
    * Уникальный идентификатор игры
    * @return id
   */
-  @ApiModelProperty(example = "1", required = true, value = "Уникальный идентификатор игры")
   @Nonnull
 
 
@@ -123,7 +117,6 @@ public class Game   {
    * Название игры
    * @return name
   */
-  @ApiModelProperty(example = "Мега супер игра", required = true, value = "Название игры")
   @Nonnull
 
 
@@ -144,7 +137,6 @@ public class Game   {
    * Описание игры
    * @return description
   */
-  @ApiModelProperty(example = "Друзья сыграют в дружеском матче в эту субботу.", value = "Описание игры")
 
 
   public String getDescription() {
@@ -164,10 +156,7 @@ public class Game   {
    * Дата и время начала игры
    * @return startDate
   */
-  @ApiModelProperty(example = "2024-11-16T15:00Z", required = true, value = "Дата и время начала игры")
   @Nonnull
-
-  @Valid
 
   public LocalDateTime getStartDate() {
     return startDate;
@@ -186,7 +175,6 @@ public class Game   {
    * Статус игры
    * @return status
   */
-  @ApiModelProperty(example = "ожидание", value = "Статус игры")
 
 
   public StatusEnum getStatus() {
@@ -206,7 +194,6 @@ public class Game   {
    * id администратора, создавшего игру
    * @return creatorId
   */
-  @ApiModelProperty(example = "2", required = true, value = "id администратора, создавшего игру")
   @Nonnull
 
 
@@ -227,7 +214,6 @@ public class Game   {
    * id поля, на котором будет проводиться игра
    * @return fieldId
   */
-  @ApiModelProperty(example = "1", required = true, value = "id поля, на котором будет проводиться игра")
   @Nonnull
 
 
@@ -256,7 +242,6 @@ public class Game   {
    * id команд, участвующих в игре
    * @return teamsIds
   */
-  @ApiModelProperty(example = "[10,11]", value = "id команд, участвующих в игре")
 
 
   public List<Integer> getTeamsIds() {
@@ -276,7 +261,6 @@ public class Game   {
    * id очереди на игру
    * @return queueId
   */
-  @ApiModelProperty(example = "1", value = "id очереди на игру")
 
 
   public Integer getQueueId() {

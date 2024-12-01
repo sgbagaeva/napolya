@@ -1,7 +1,6 @@
 package com.example.napolya.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModelProperty;
 import jakarta.annotation.Generated;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
@@ -10,12 +9,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.Valid;
 
 import java.net.URL;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -44,7 +40,6 @@ public class Photo   {
      * Уникальный идентификатор фото
      * @return id
      */
-    @ApiModelProperty(example = "1", required = true, value = "Уникальный идентификатор фото")
     @Nonnull
 
 
@@ -65,7 +60,6 @@ public class Photo   {
      * URL фото
      * @return url
      */
-    @ApiModelProperty(example = "https://example.com/photo1.jpg", required = true, value = "URL фото")
     @Nonnull
 
 
@@ -86,7 +80,6 @@ public class Photo   {
      * Дата создания фото
      * @return createdAt
      */
-    @ApiModelProperty(example = "2024-04-01T15:00:00Z", required = true, value = "Дата создания фото")
     @Nonnull
 
 
@@ -107,7 +100,6 @@ public class Photo   {
      * Описание фото
      * @return description
      */
-    @ApiModelProperty(example = "Фото с матча на поле А в четверг.", value = "Описание фото")
     @Nullable
 
     public String getDescription() {

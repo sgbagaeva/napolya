@@ -1,7 +1,6 @@
 package com.example.napolya.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModelProperty;
 import jakarta.annotation.Generated;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
@@ -10,7 +9,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.Valid;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +19,6 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "fields")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-11-22T19:51:05.893207800+03:00[Europe/Moscow]")
 public class Field   {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,7 +38,6 @@ public class Field   {
   private Integer providerId;
 
   @JsonProperty("games_ids")
-  @Valid
   private List<Integer> gamesIds = null;
 
   public Field id(Integer id) {
@@ -53,7 +49,6 @@ public class Field   {
    * Уникальный идентификатор поля
    * @return id
   */
-  @ApiModelProperty(example = "1", required = true, value = "Уникальный идентификатор поля")
   @Nonnull
 
 
@@ -74,7 +69,6 @@ public class Field   {
    * Название поля
    * @return name
   */
-  @ApiModelProperty(example = "Арена Спорта", required = true, value = "Название поля")
   @Nonnull
 
 
@@ -95,7 +89,6 @@ public class Field   {
    * Описание поля
    * @return description
   */
-  @ApiModelProperty(example = "Большой стадион с искусственным покрытием для футбольных матчей.", value = "Описание поля")
   @Nullable
 
   public String getDescription() {
@@ -115,7 +108,6 @@ public class Field   {
    * Местоположение поля
    * @return location
   */
-  @ApiModelProperty(example = "ул. Спортивная, д. 1, г. Санкт-Петербург", required = true, value = "Местоположение поля")
   @Nonnull
 
 
@@ -136,7 +128,6 @@ public class Field   {
    * id провайдера поля
    * @return providerId
   */
-  @ApiModelProperty(example = "2", required = true, value = "id провайдера поля")
   @Nonnull
 
 
@@ -165,7 +156,6 @@ public class Field   {
    * id игр, проводимых на этом поле
    * @return gamesIds
   */
-  @ApiModelProperty(example = "[101,102,103]", value = "id игр, проводимых на этом поле")
 
 
   public List<Integer> getGamesIds() {

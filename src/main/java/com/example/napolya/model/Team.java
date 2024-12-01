@@ -1,16 +1,13 @@
 package com.example.napolya.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModelProperty;
 import jakarta.annotation.Generated;
 import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.Valid;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +29,6 @@ public class Team   {
   private String name;
 
   @JsonProperty("players_ids")
-  @Valid
   private List<Integer> playersIds = null;
 
   @JsonProperty("game_id")
@@ -50,7 +46,6 @@ public class Team   {
    * Уникальный идентификатор команды
    * @return id
   */
-  @ApiModelProperty(example = "1", required = true, value = "Уникальный идентификатор команды")
   @Nonnull
 
 
@@ -71,7 +66,6 @@ public class Team   {
    * Название команды
    * @return name
   */
-  @ApiModelProperty(example = "Команда Победителей", required = true, value = "Название команды")
   @Nonnull
 
 
@@ -100,7 +94,6 @@ public class Team   {
    * id игроков, входящих в состав команды
    * @return playersIds
   */
-  @ApiModelProperty(example = "[2,3,4]", value = "id игроков, входящих в состав команды")
 
 
   public List<Integer> getPlayersIds() {
@@ -120,7 +113,6 @@ public class Team   {
    * id игры, в которой участвует команда
    * @return gameId
   */
-  @ApiModelProperty(example = "1", required = true, value = "id игры, в которой участвует команда")
   @Nonnull
 
 
@@ -141,7 +133,6 @@ public class Team   {
    * id капитана команды
    * @return captainId
   */
-  @ApiModelProperty(example = "2", required = true, value = "id капитана команды")
   @Nonnull
 
 

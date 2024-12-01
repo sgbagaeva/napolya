@@ -2,8 +2,6 @@ package com.example.napolya.model;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModelProperty;
-import jakarta.annotation.Generated;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
@@ -12,7 +10,6 @@ import java.util.Objects;
 /**
  * InlineObject
  */
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-11-22T19:51:05.893207800+03:00[Europe/Moscow]")
 public class InlineObject   {
   @JsonProperty("username")
   private String username;
@@ -37,7 +34,6 @@ public class InlineObject   {
    * Get username
    * @return username
   */
-  @ApiModelProperty(example = "Света", required = true, value = "")
   @Nonnull
 
 
@@ -58,7 +54,6 @@ public class InlineObject   {
    * Фамилия игрока
    * @return surname
   */
-  @ApiModelProperty(example = "Багаева", value = "Фамилия игрока")
 
 
   public String getSurname() {
@@ -78,7 +73,6 @@ public class InlineObject   {
    * Электронная почта игрока
    * @return email
   */
-  @ApiModelProperty(example = "sveta@gmail.com", value = "Электронная почта игрока")
 
 
   public String getEmail() {
@@ -98,7 +92,6 @@ public class InlineObject   {
    * Get password
    * @return password
   */
-  @ApiModelProperty(example = "666#999", required = true, value = "")
   @Nonnull
 
 

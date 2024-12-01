@@ -3,16 +3,12 @@ package com.example.napolya.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.swagger.annotations.ApiModelProperty;
-import jakarta.annotation.Generated;
 import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.Valid;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -23,7 +19,6 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "notifications")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-11-22T19:51:05.893207800+03:00[Europe/Moscow]")
 public class Notification   {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -89,7 +84,6 @@ public class Notification   {
    * Уникальный идентификатор уведомления
    * @return id
   */
-  @ApiModelProperty(example = "1", required = true, value = "Уникальный идентификатор уведомления")
   @Nonnull
 
 
@@ -110,7 +104,6 @@ public class Notification   {
    * Текст уведомления
    * @return text
   */
-  @ApiModelProperty(example = "Вы записаны в команду A!", required = true, value = "Текст уведомления")
   @Nonnull
 
 
@@ -131,7 +124,6 @@ public class Notification   {
    * Тип уведомления
    * @return type
   */
-  @ApiModelProperty(example = "уведомление о составе команды", required = true, value = "Тип уведомления")
   @Nonnull
 
 
@@ -152,7 +144,6 @@ public class Notification   {
    * id получателя уведомления
    * @return recipientId
   */
-  @ApiModelProperty(example = "2", required = true, value = "id получателя уведомления")
   @Nonnull
 
 
@@ -173,7 +164,6 @@ public class Notification   {
    * Статус уведомления
    * @return status
   */
-  @ApiModelProperty(example = "непрочитанное", required = true, value = "Статус уведомления")
   @Nonnull
 
 
@@ -194,10 +184,8 @@ public class Notification   {
    * Дата и время отправки уведомления
    * @return date
   */
-  @ApiModelProperty(example = "2024-11-16T10:00Z", required = true, value = "Дата и время отправки уведомления")
   @Nonnull
 
-  @Valid
 
   public LocalDateTime getDate() {
     return date;

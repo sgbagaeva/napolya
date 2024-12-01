@@ -6,21 +6,17 @@
 package com.example.napolya.controller;
 
 import com.example.napolya.model.Provider;
-import io.swagger.annotations.*;
 import jakarta.annotation.Generated;
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.NativeWebRequest;
 
 import java.util.List;
 import java.util.Optional;
+
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-11-22T19:51:05.893207800+03:00[Europe/Moscow]")
-@Validated
-@Api(value = "providers", description = "the providers API")
 public interface ProvidersApi {
 
     default Optional<NativeWebRequest> getRequest() {
@@ -32,17 +28,14 @@ public interface ProvidersApi {
      *
      * @return Успешный ответ с массивом названий провайдеров (status code 200)
      */
-    @ApiOperation(value = "Получить список названий провайдеров", nickname = "providersGet", notes = "", response = String.class, responseContainer = "List", tags={ "Provider", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "Успешный ответ с массивом названий провайдеров", response = String.class, responseContainer = "List") })
     @RequestMapping(
-        method = RequestMethod.GET,
-        value = "/providers",
-        produces = { "application/json" }
+            method = RequestMethod.GET,
+            value = "/providers",
+            produces = {"application/json"}
     )
     default ResponseEntity<List<String>> providersGet() {
         getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+            for (MediaType mediaType : MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
                     String exampleString = "[\"Поляна\",\"Интерспорт\"]";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
@@ -51,50 +44,38 @@ public interface ProvidersApi {
             }
         });
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
     }
-
 
     /**
      * DELETE /providers/{id} : Удалить провайдера
      *
      * @param id ID провайдера (required)
      * @return Провайдер успешно удалён (status code 204)
-     *         or Провайдер не найден (status code 404)
+     * or Провайдер не найден (status code 404)
      */
-    @ApiOperation(value = "Удалить провайдера", nickname = "providersIdDelete", notes = "", tags={ "Provider", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 204, message = "Провайдер успешно удалён"),
-        @ApiResponse(code = 404, message = "Провайдер не найден") })
     @RequestMapping(
-        method = RequestMethod.DELETE,
-        value = "/providers/{id}"
+            method = RequestMethod.DELETE,
+            value = "/providers/{id}"
     )
-    default ResponseEntity<Void> providersIdDelete(@ApiParam(value = "ID провайдера", required = true) @PathVariable("id") Integer id) {
+    default ResponseEntity<Void> providersIdDelete(@PathVariable("id") Integer id) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
     }
-
 
     /**
      * GET /providers/{id} : Получить информацию о провайдере
      *
      * @param id ID провайдера (required)
      * @return Информация о провайдере (status code 200)
-     *         or Провайдер не найден (status code 404)
+     * or Провайдер не найден (status code 404)
      */
-    @ApiOperation(value = "Получить информацию о провайдере", nickname = "providersIdGet", notes = "", response = Provider.class, tags={ "Provider", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "Информация о провайдере", response = Provider.class),
-        @ApiResponse(code = 404, message = "Провайдер не найден") })
     @RequestMapping(
-        method = RequestMethod.GET,
-        value = "/providers/{id}",
-        produces = { "application/json" }
+            method = RequestMethod.GET,
+            value = "/providers/{id}",
+            produces = {"application/json"}
     )
-    default ResponseEntity<Provider> providersIdGet(@ApiParam(value = "ID провайдера", required = true) @PathVariable("id") Integer id) {
+    default ResponseEntity<Provider> providersIdGet(@PathVariable("id") Integer id) {
         getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+            for (MediaType mediaType : MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
                     String exampleString = "{ \"fields_ids\" : [ 1, 2, 3 ], \"name\" : \"Поляна\", \"id\" : 1 }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
@@ -103,31 +84,25 @@ public interface ProvidersApi {
             }
         });
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
     }
-
 
     /**
      * PUT /providers/{id} : Обновить информацию о провайдере
      *
      * @param id ID провайдера (required)
-     * @param provider  (required)
+     * @param provider (required)
      * @return Провайдер успешно обновлён (status code 200)
-     *         or Провайдер не найден (status code 404)
+     * or Провайдер не найден (status code 404)
      */
-    @ApiOperation(value = "Обновить информацию о провайдере", nickname = "providersIdPut", notes = "", response = Provider.class, tags={ "Provider", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "Провайдер успешно обновлён", response = Provider.class),
-        @ApiResponse(code = 404, message = "Провайдер не найден") })
     @RequestMapping(
-        method = RequestMethod.PUT,
-        value = "/providers/{id}",
-        produces = { "application/json" },
-        consumes = { "application/json" }
+            method = RequestMethod.PUT,
+            value = "/providers/{id}",
+            produces = {"application/json"},
+            consumes = {"application/json"}
     )
-    default ResponseEntity<Provider> providersIdPut(@ApiParam(value = "ID провайдера", required = true) @PathVariable("id") Integer id,@ApiParam(value = "", required = true) @Valid @RequestBody Provider provider) {
+    default ResponseEntity<Provider> providersIdPut(@PathVariable("id") Integer id, @RequestBody Provider provider) {
         getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+            for (MediaType mediaType : MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
                     String exampleString = "{ \"fields_ids\" : [ 1, 2, 3 ], \"name\" : \"Поляна\", \"id\" : 1 }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
@@ -136,28 +111,23 @@ public interface ProvidersApi {
             }
         });
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
     }
-
 
     /**
      * POST /providers : Создать нового провайдера
      *
-     * @param provider  (required)
+     * @param provider (required)
      * @return Провайдер успешно создан (status code 201)
      */
-    @ApiOperation(value = "Создать нового провайдера", nickname = "providersPost", notes = "", response = Provider.class, tags={ "Provider", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 201, message = "Провайдер успешно создан", response = Provider.class) })
     @RequestMapping(
-        method = RequestMethod.POST,
-        value = "/providers",
-        produces = { "application/json" },
-        consumes = { "application/json" }
+            method = RequestMethod.POST,
+            value = "/providers",
+            produces = {"application/json"},
+            consumes = {"application/json"}
     )
-    default ResponseEntity<Provider> providersPost(@ApiParam(value = "", required = true) @Valid @RequestBody Provider provider) {
+    default ResponseEntity<Provider> providersPost(@RequestBody Provider provider) {
         getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+            for (MediaType mediaType : MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
                     String exampleString = "{ \"fields_ids\" : [ 1, 2, 3 ], \"name\" : \"Поляна\", \"id\" : 1 }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
@@ -166,7 +136,5 @@ public interface ProvidersApi {
             }
         });
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
     }
-
 }

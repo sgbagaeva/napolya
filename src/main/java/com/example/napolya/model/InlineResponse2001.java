@@ -3,10 +3,7 @@ package com.example.napolya.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.swagger.annotations.ApiModelProperty;
 import jakarta.annotation.Generated;
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
 
 import java.util.Objects;
 
@@ -67,7 +64,6 @@ public class InlineResponse2001   {
    * Get token
    * @return token
   */
-  @ApiModelProperty(example = "jwt-token", value = "")
 
 
   public String getToken() {
@@ -87,7 +83,6 @@ public class InlineResponse2001   {
    * Get role
    * @return role
   */
-  @ApiModelProperty(example = "admin", value = "")
 
 
   public RoleEnum getRole() {

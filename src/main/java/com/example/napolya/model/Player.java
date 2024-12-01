@@ -1,16 +1,12 @@
 package com.example.napolya.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModelProperty;
 import jakarta.annotation.Generated;
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.Valid;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -22,7 +18,6 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "players")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-11-22T19:51:05.893207800+03:00[Europe/Moscow]")
 public class Player   {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,7 +47,6 @@ public class Player   {
   private Integer rating;
 
   @JsonProperty("games_ids")
-  @Valid
   private List<Integer> gamesIds = null;
 
   @JsonProperty("entries_amount")
@@ -67,7 +61,6 @@ public class Player   {
    * Уникальный идентификатор игрока
    * @return id
   */
-  @ApiModelProperty(example = "1234", value = "Уникальный идентификатор игрока")
 
 
   public Integer getId() {
@@ -87,7 +80,6 @@ public class Player   {
    * Имя игрока
    * @return name
   */
-  @ApiModelProperty(example = "Света", value = "Имя игрока")
 
 
   public String getName() {
@@ -107,7 +99,6 @@ public class Player   {
    * Get surname
    * @return surname
   */
-  @ApiModelProperty(example = "Багаева", value = "")
 
 
   public String getSurname() {
@@ -127,7 +118,6 @@ public class Player   {
    * Get email
    * @return email
   */
-  @ApiModelProperty(example = "sveta@gmail.com", value = "")
 
 
   public String getEmail() {
@@ -147,7 +137,6 @@ public class Player   {
    * Пароль игрока
    * @return password
   */
-  @ApiModelProperty(example = "666#999", value = "Пароль игрока")
 
 
   public String getPassword() {
@@ -167,7 +156,6 @@ public class Player   {
    * Роль игрока
    * @return role
   */
-  @ApiModelProperty(example = "Игрок", value = "Роль игрока")
 
 
   public String getRole() {
@@ -187,9 +175,6 @@ public class Player   {
    * Get registrationDate
    * @return registrationDate
   */
-  @ApiModelProperty(example = "2024-01-01T12:00Z", value = "")
-
-  @Valid
 
   public LocalDateTime getRegistrationDate() {
     return registrationDate;
@@ -208,7 +193,6 @@ public class Player   {
    * Рейтинг игрока
    * @return rating
   */
-  @ApiModelProperty(example = "12", value = "Рейтинг игрока")
 
 
   public Integer getRating() {
@@ -236,7 +220,6 @@ public class Player   {
    * Список id игр, на которые записан игрок
    * @return gamesIds
   */
-  @ApiModelProperty(example = "[2,5,7]", value = "Список id игр, на которые записан игрок")
 
 
   public List<Integer> getGamesIds() {
@@ -256,7 +239,6 @@ public class Player   {
    * Количество записей на игры
    * @return entriesAmount
   */
-  @ApiModelProperty(example = "3", value = "Количество записей на игры")
 
 
   public Integer getEntriesAmount() {

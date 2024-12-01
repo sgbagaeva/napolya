@@ -6,21 +6,16 @@
 package com.example.napolya.controller;
 
 import com.example.napolya.model.Team;
-import io.swagger.annotations.*;
 import jakarta.annotation.Generated;
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.NativeWebRequest;
 
 import java.util.List;
 import java.util.Optional;
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-11-22T19:51:05.893207800+03:00[Europe/Moscow]")
-@Validated
-@Api(value = "teams", description = "the teams API")
+
 public interface TeamsApi {
 
     default Optional<NativeWebRequest> getRequest() {
@@ -32,17 +27,14 @@ public interface TeamsApi {
      *
      * @return Успешный ответ с массивом названий команд (status code 200)
      */
-    @ApiOperation(value = "Получить список названий команд", nickname = "teamsGet", notes = "", response = String.class, responseContainer = "List", tags={ "Team", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "Успешный ответ с массивом названий команд", response = String.class, responseContainer = "List") })
     @RequestMapping(
-        method = RequestMethod.GET,
-        value = "/teams",
-        produces = { "application/json" }
+            method = RequestMethod.GET,
+            value = "/teams",
+            produces = {"application/json"}
     )
     default ResponseEntity<List<String>> teamsGet() {
         getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+            for (MediaType mediaType : MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
                     String exampleString = "[\"Команда Победителей\",\"Лига Атлетов\"]";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
@@ -51,50 +43,38 @@ public interface TeamsApi {
             }
         });
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
     }
-
 
     /**
      * DELETE /teams/{id} : Удалить команду
      *
      * @param id ID команды (required)
      * @return Команда успешно удалена (status code 204)
-     *         or Команда не найдена (status code 404)
+     * or Команда не найдена (status code 404)
      */
-    @ApiOperation(value = "Удалить команду", nickname = "teamsIdDelete", notes = "", tags={ "Team", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 204, message = "Команда успешно удалена"),
-        @ApiResponse(code = 404, message = "Команда не найдена") })
     @RequestMapping(
-        method = RequestMethod.DELETE,
-        value = "/teams/{id}"
+            method = RequestMethod.DELETE,
+            value = "/teams/{id}"
     )
-    default ResponseEntity<Void> teamsIdDelete(@ApiParam(value = "ID команды", required = true) @PathVariable("id") Integer id) {
+    default ResponseEntity<Void> teamsIdDelete(@PathVariable("id") Integer id) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
     }
-
 
     /**
      * GET /teams/{id} : Получить информацию о команде
      *
      * @param id ID команды (required)
      * @return Информация о команде (status code 200)
-     *         or Команда не найдена (status code 404)
+     * or Команда не найдена (status code 404)
      */
-    @ApiOperation(value = "Получить информацию о команде", nickname = "teamsIdGet", notes = "", response = Team.class, tags={ "Team", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "Информация о команде", response = Team.class),
-        @ApiResponse(code = 404, message = "Команда не найдена") })
     @RequestMapping(
-        method = RequestMethod.GET,
-        value = "/teams/{id}",
-        produces = { "application/json" }
+            method = RequestMethod.GET,
+            value = "/teams/{id}",
+            produces = {"application/json"}
     )
-    default ResponseEntity<Team> teamsIdGet(@ApiParam(value = "ID команды", required = true) @PathVariable("id") Integer id) {
+    default ResponseEntity<Team> teamsIdGet(@PathVariable("id") Integer id) {
         getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+            for (MediaType mediaType : MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
                     String exampleString = "{ \"name\" : \"Команда Победителей\", \"captain_id\" : 2, \"id\" : 1, \"players_ids\" : [ 2, 3, 4 ], \"game_id\" : 1 }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
@@ -103,31 +83,25 @@ public interface TeamsApi {
             }
         });
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
     }
-
 
     /**
      * PUT /teams/{id} : Обновить информацию о команде
      *
      * @param id ID команды (required)
-     * @param team  (required)
+     * @param team (required)
      * @return Команда успешно обновлена (status code 200)
-     *         or Команда не найдена (status code 404)
+     * or Команда не найдена (status code 404)
      */
-    @ApiOperation(value = "Обновить информацию о команде", nickname = "teamsIdPut", notes = "", response = Team.class, tags={ "Team", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "Команда успешно обновлена", response = Team.class),
-        @ApiResponse(code = 404, message = "Команда не найдена") })
     @RequestMapping(
-        method = RequestMethod.PUT,
-        value = "/teams/{id}",
-        produces = { "application/json" },
-        consumes = { "application/json" }
+            method = RequestMethod.PUT,
+            value = "/teams/{id}",
+            produces = {"application/json"},
+            consumes = {"application/json"}
     )
-    default ResponseEntity<Team> teamsIdPut(@ApiParam(value = "ID команды", required = true) @PathVariable("id") Integer id,@ApiParam(value = "", required = true) @Valid @RequestBody Team team) {
+    default ResponseEntity<Team> teamsIdPut(@PathVariable("id") Integer id, @RequestBody Team team) {
         getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+            for (MediaType mediaType : MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
                     String exampleString = "{ \"name\" : \"Команда Победителей\", \"captain_id\" : 2, \"id\" : 1, \"players_ids\" : [ 2, 3, 4 ], \"game_id\" : 1 }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
@@ -136,28 +110,23 @@ public interface TeamsApi {
             }
         });
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
     }
-
 
     /**
      * POST /teams : Создать новую команду
      *
-     * @param team  (required)
+     * @param team (required)
      * @return Команда успешно создана (status code 201)
      */
-    @ApiOperation(value = "Создать новую команду", nickname = "teamsPost", notes = "", response = Team.class, tags={ "Team", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 201, message = "Команда успешно создана", response = Team.class) })
     @RequestMapping(
-        method = RequestMethod.POST,
-        value = "/teams",
-        produces = { "application/json" },
-        consumes = { "application/json" }
+            method = RequestMethod.POST,
+            value = "/teams",
+            produces = {"application/json"},
+            consumes = {"application/json"}
     )
-    default ResponseEntity<Team> teamsPost(@ApiParam(value = "", required = true) @Valid @RequestBody Team team) {
+    default ResponseEntity<Team> teamsPost(@RequestBody Team team) {
         getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+            for (MediaType mediaType : MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
                     String exampleString = "{ \"name\" : \"Команда Победителей\", \"captain_id\" : 2, \"id\" : 1, \"players_ids\" : [ 2, 3, 4 ], \"game_id\" : 1 }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
@@ -166,7 +135,6 @@ public interface TeamsApi {
             }
         });
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
     }
-
 }
+

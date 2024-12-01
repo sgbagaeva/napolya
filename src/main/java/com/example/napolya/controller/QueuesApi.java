@@ -6,21 +6,17 @@
 package com.example.napolya.controller;
 
 import com.example.napolya.model.Queue;
-import io.swagger.annotations.*;
 import jakarta.annotation.Generated;
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.NativeWebRequest;
 
 import java.util.List;
 import java.util.Optional;
+
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-11-22T19:51:05.893207800+03:00[Europe/Moscow]")
-@Validated
-@Api(value = "queues", description = "the queues API")
 public interface QueuesApi {
 
     default Optional<NativeWebRequest> getRequest() {
@@ -32,17 +28,14 @@ public interface QueuesApi {
      *
      * @return Успешный ответ с массивом id очередей (status code 200)
      */
-    @ApiOperation(value = "Получить список id очередей", nickname = "queuesGet", notes = "", response = Integer.class, responseContainer = "List", tags={ "Queue", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "Успешный ответ с массивом id очередей", response = Integer.class, responseContainer = "List") })
     @RequestMapping(
-        method = RequestMethod.GET,
-        value = "/queues",
-        produces = { "application/json" }
+            method = RequestMethod.GET,
+            value = "/queues",
+            produces = {"application/json"}
     )
     default ResponseEntity<List<Integer>> queuesGet() {
         getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+            for (MediaType mediaType : MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
                     String exampleString = "0";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
@@ -51,50 +44,38 @@ public interface QueuesApi {
             }
         });
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
     }
-
 
     /**
      * DELETE /queues/{id} : Удалить очередь
      *
      * @param id ID очереди (required)
      * @return Очередь успешно удалена (status code 204)
-     *         or Очередь не найдена (status code 404)
+     * or Очередь не найдена (status code 404)
      */
-    @ApiOperation(value = "Удалить очередь", nickname = "queuesIdDelete", notes = "", tags={ "Queue", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 204, message = "Очередь успешно удалена"),
-        @ApiResponse(code = 404, message = "Очередь не найдена") })
     @RequestMapping(
-        method = RequestMethod.DELETE,
-        value = "/queues/{id}"
+            method = RequestMethod.DELETE,
+            value = "/queues/{id}"
     )
-    default ResponseEntity<Void> queuesIdDelete(@ApiParam(value = "ID очереди", required = true) @PathVariable("id") Integer id) {
+    default ResponseEntity<Void> queuesIdDelete(@PathVariable("id") Integer id) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
     }
-
 
     /**
      * GET /queues/{id} : Получить информацию об очереди
      *
      * @param id ID очереди (required)
      * @return Информация об очереди (status code 200)
-     *         or Очередь не найдена (status code 404)
+     * or Очередь не найдена (status code 404)
      */
-    @ApiOperation(value = "Получить информацию об очереди", nickname = "queuesIdGet", notes = "", response = Queue.class, tags={ "Queue", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "Информация об очереди", response = Queue.class),
-        @ApiResponse(code = 404, message = "Очередь не найдена") })
     @RequestMapping(
-        method = RequestMethod.GET,
-        value = "/queues/{id}",
-        produces = { "application/json" }
+            method = RequestMethod.GET,
+            value = "/queues/{id}",
+            produces = {"application/json"}
     )
-    default ResponseEntity<Queue> queuesIdGet(@ApiParam(value = "ID очереди", required = true) @PathVariable("id") Integer id) {
+    default ResponseEntity<Queue> queuesIdGet(@PathVariable("id") Integer id) {
         getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+            for (MediaType mediaType : MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
                     String exampleString = "{ \"id\" : 1, \"players_ids\" : [ 5, 6, 7 ], \"game_id\" : 1 }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
@@ -103,31 +84,25 @@ public interface QueuesApi {
             }
         });
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
     }
-
 
     /**
      * PUT /queues/{id} : Обновить информацию об очереди
      *
      * @param id ID очереди (required)
-     * @param queue  (required)
+     * @param queue (required)
      * @return Очередь успешно обновлена (status code 200)
-     *         or Очередь не найдена (status code 404)
+     * or Очередь не найдена (status code 404)
      */
-    @ApiOperation(value = "Обновить информацию об очереди", nickname = "queuesIdPut", notes = "", response = Queue.class, tags={ "Queue", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "Очередь успешно обновлена", response = Queue.class),
-        @ApiResponse(code = 404, message = "Очередь не найдена") })
     @RequestMapping(
-        method = RequestMethod.PUT,
-        value = "/queues/{id}",
-        produces = { "application/json" },
-        consumes = { "application/json" }
+            method = RequestMethod.PUT,
+            value = "/queues/{id}",
+            produces = {"application/json"},
+            consumes = {"application/json"}
     )
-    default ResponseEntity<Queue> queuesIdPut(@ApiParam(value = "ID очереди", required = true) @PathVariable("id") Integer id,@ApiParam(value = "", required = true) @Valid @RequestBody Queue queue) {
+    default ResponseEntity<Queue> queuesIdPut(@PathVariable("id") Integer id, @RequestBody Queue queue) {
         getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+            for (MediaType mediaType : MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
                     String exampleString = "{ \"id\" : 1, \"players_ids\" : [ 5, 6, 7 ], \"game_id\" : 1 }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
@@ -136,28 +111,23 @@ public interface QueuesApi {
             }
         });
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
     }
-
 
     /**
      * POST /queues : Создать новую очередь
      *
-     * @param queue  (required)
+     * @param queue (required)
      * @return Очередь успешно создана (status code 201)
      */
-    @ApiOperation(value = "Создать новую очередь", nickname = "queuesPost", notes = "", response = Queue.class, tags={ "Queue", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 201, message = "Очередь успешно создана", response = Queue.class) })
     @RequestMapping(
-        method = RequestMethod.POST,
-        value = "/queues",
-        produces = { "application/json" },
-        consumes = { "application/json" }
+            method = RequestMethod.POST,
+            value = "/queues",
+            produces = {"application/json"},
+            consumes = {"application/json"}
     )
-    default ResponseEntity<Queue> queuesPost(@ApiParam(value = "", required = true) @Valid @RequestBody Queue queue) {
+    default ResponseEntity<Queue> queuesPost(@RequestBody Queue queue) {
         getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+            for (MediaType mediaType : MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
                     String exampleString = "{ \"id\" : 1, \"players_ids\" : [ 5, 6, 7 ], \"game_id\" : 1 }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
@@ -166,7 +136,6 @@ public interface QueuesApi {
             }
         });
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
     }
-
 }
+

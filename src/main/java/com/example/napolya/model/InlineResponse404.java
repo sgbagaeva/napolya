@@ -1,17 +1,12 @@
 package com.example.napolya.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModelProperty;
-import jakarta.annotation.Generated;
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
 
 import java.util.Objects;
 
 /**
  * InlineResponse404
  */
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-11-22T19:51:05.893207800+03:00[Europe/Moscow]")
 public class InlineResponse404   {
   @JsonProperty("message")
   private String message;
@@ -25,7 +20,6 @@ public class InlineResponse404   {
    * Get message
    * @return message
   */
-  @ApiModelProperty(example = "Игрок не найден", value = "")
 
 
   public String getMessage() {

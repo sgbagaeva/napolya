@@ -19,37 +19,32 @@ repositories {
 }
 
 dependencies {
-	// Swagger Annotations для аннотирования API и генерации документации
-	implementation 'io.swagger.core.v3:swagger-annotations:2.1.6'
-	// Springdoc OpenAPI UI - библиотека для интеграции с Spring Boot и Swagger UI для предоставления интерфейса визуализации API
-	implementation 'org.springdoc:springdoc-openapi-ui:1.5.2'
 	// Gson - библиотека для сериализации и десериализации объектов Java в JSON и обратно
 	implementation 'com.google.code.gson:gson:2.10.1'
-	// Spring Boot Starter Data JPA - это набор зависимостей, объединяющий JPA и Spring Data, упрощая работу с базами данных
+
+	// Spring Boot Starter Data JPA - набор зависимостей, объединяющий JPA и Spring Data для работы с базами данных
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	// Springfox Swagger 2 - библиотека для интеграции Swagger 2 с Spring Boot приложения для генерации документации API
-	implementation 'io.springfox:springfox-swagger2:2.9.2'
-	// Swagger UI для Springfox - интерфейс пользователя для Swagger, который позволяет визуально тестировать API
-	implementation 'io.springfox:springfox-swagger-ui:2.10.0'
+
 	// Spring Boot Starter Web - библиотека для создания веб-приложений на основе Spring MVC, включая RESTful API
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+
 	// Spring Boot Starter WebSocket - библиотека для разработки приложений с поддержкой WebSocket
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
-	// Spring Boot DevTools - инструменты разработчика для повышения производительности при разработке, включая автоматическую перезагрузку
+
+	// Spring Boot DevTools - инструменты для повышения продуктивности разработки, включая автоматическую перезагрузку
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
 	// MySQL Connector/J - JDBC драйвер для доступа к базе данных MySQL
 	runtimeOnly 'com.mysql:mysql-connector-j'
-	// Spring Boot Starter Test - набор инструментов для тестирования приложений на Spring, включая JUnit, Mockito и Spring Test
+
+	// Spring Boot Starter Test - набор инструментов для тестирования приложений на Spring, включая JUnit и Mockito
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	// JUnit Platform Launcher - обеспечивает запуск тестов на платформе JUnit, позволяет интеграцию с другими тестовыми фреймворками
+
+	// JUnit Platform Launcher - обеспечивает запуск тестов на платформе JUnit
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-	// Spring Boot Starter JDBC - набор зависимостей для работы с базами данных через JDBC
-	// implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-	// Spring Boot Starter Security - набор зависимостей для добавления аутентификации и авторизации в приложение
-	// implementation 'org.springframework.boot:spring-boot-starter-security'
-	// Spring Security Test - инструменты для тестирования компонентов Spring Security
-	// testImplementation 'org.springframework.security:spring-security-test'
 }
+
+
 
 openApiGenerate {
 	generatorName = "spring" // Или другой нужный вам генератор, например "java", "ktor", и т.д.

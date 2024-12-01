@@ -1,16 +1,13 @@
 package com.example.napolya.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModelProperty;
 import jakarta.annotation.Generated;
 import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.Valid;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +29,6 @@ public class Provider   {
   private String name;
 
   @JsonProperty("fields_ids")
-  @Valid
   private List<Integer> fieldsIds = null;
 
   public Provider id(Integer id) {
@@ -44,7 +40,6 @@ public class Provider   {
    * Уникальный идентификатор провайдера
    * @return id
   */
-  @ApiModelProperty(example = "1", required = true, value = "Уникальный идентификатор провайдера")
   @Nonnull
 
 
@@ -65,7 +60,6 @@ public class Provider   {
    * Название провайдера
    * @return name
   */
-  @ApiModelProperty(example = "Поляна", required = true, value = "Название провайдера")
   @Nonnull
 
 
@@ -94,7 +88,6 @@ public class Provider   {
    * id полей, которые предоставляет провайдер
    * @return fieldsIds
   */
-  @ApiModelProperty(example = "[1,2,3]", value = "id полей, которые предоставляет провайдер")
 
 
   public List<Integer> getFieldsIds() {

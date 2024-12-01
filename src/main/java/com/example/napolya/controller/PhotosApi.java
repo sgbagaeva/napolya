@@ -6,20 +6,16 @@
 package com.example.napolya.controller;
 
 import com.example.napolya.model.InlineResponse200;
-import io.swagger.annotations.*;
 import jakarta.annotation.Generated;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.NativeWebRequest;
 
 import java.util.List;
 import java.util.Optional;
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-11-22T19:51:05.893207800+03:00[Europe/Moscow]")
-@Validated
-@Api(value = "photos", description = "the photos API")
+
 public interface PhotosApi {
 
     default Optional<NativeWebRequest> getRequest() {
@@ -32,17 +28,14 @@ public interface PhotosApi {
      *
      * @return Успешный ответ с списком фотографий (status code 200)
      */
-    @ApiOperation(value = "Получение списка фотографий", nickname = "photosGet", notes = "Возвращает список фотографий для отображения на главной странице.", response = InlineResponse200.class, responseContainer = "List", tags={ "Photo", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "Успешный ответ с списком фотографий", response = InlineResponse200.class, responseContainer = "List") })
     @RequestMapping(
-        method = RequestMethod.GET,
-        value = "/photos",
-        produces = { "application/json" }
+            method = RequestMethod.GET,
+            value = "/photos",
+            produces = {"application/json"}
     )
     default ResponseEntity<List<InlineResponse200>> photosGet() {
         getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+            for (MediaType mediaType : MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
                     String exampleString = "{ \"created_at\" : \"2024-04-01T15:00:00Z\", \"description\" : \"Описание фотографии\", \"id\" : 1, \"url\" : \"https://example.com/photo1.jpg\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
@@ -51,7 +44,5 @@ public interface PhotosApi {
             }
         });
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
     }
-
 }

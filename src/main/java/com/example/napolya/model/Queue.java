@@ -1,16 +1,13 @@
 package com.example.napolya.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModelProperty;
 import jakarta.annotation.Generated;
 import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.Valid;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +26,6 @@ public class Queue   {
   private Integer id;
 
   @JsonProperty("players_ids")
-  @Valid
   private List<Integer> playersIds = new ArrayList<>();
 
   @JsonProperty("game_id")
@@ -44,7 +40,6 @@ public class Queue   {
    * Уникальный идентификатор очереди
    * @return id
   */
-  @ApiModelProperty(example = "1", required = true, value = "Уникальный идентификатор очереди")
   @Nonnull
 
 
@@ -70,7 +65,6 @@ public class Queue   {
    * id игроков, находящихся в очереди
    * @return playersIds
   */
-  @ApiModelProperty(example = "[5,6,7]", required = true, value = "id игроков, находящихся в очереди")
   @Nonnull
 
 
@@ -91,7 +85,6 @@ public class Queue   {
    * id игры, на которую стоит очередь
    * @return gameId
   */
-  @ApiModelProperty(example = "1", required = true, value = "id игры, на которую стоит очередь")
   @Nonnull
 
 
