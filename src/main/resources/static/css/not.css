@@ -1,0 +1,98 @@
+/* Убираем отступы и устанавливаем высоту для контейнеров html и body */
+html, body {
+    margin: 0; /* Убираем отступ для body */
+    padding: 0; /* Убираем отступ для body */
+    height: 100%; /* Устанавливаем высоту 100% для html и body */
+    overflow: hidden; /* Убираем прокрутку */
+}
+
+/* Контейнер для админки */
+.admin-container {
+    display: flex; /* Используем флексбокс для центрирования */
+    justify-content: center; /* Центрируем по горизонтали */
+    align-items: center; /* Центрируем по вертикали */
+    width: 100vw; /* Полная ширина окна */
+    height: 100vh; /* Полная высота окна */
+    background: #FBFBFB; /* Фоновый цвет страницы */
+}
+
+/* Rectangle 113 - Фон для модального окна */
+.rectangle-113 {
+    box-sizing: border-box;
+    width: 1430px; /* Ширина модального окна */
+    height: 488px; /* Высота модального окна */
+    background: #EDEDED; /* Цвет фона */
+    border: 1px solid #000000; /* Цвет границы */
+    border-radius: 30px; /* Закругление углов */
+    display: flex; /* Используем flexbox для выравнивания содержимого */
+    flex-direction: column; /* Располагаем элементы в колонку */
+    align-items: center; /* Центрируем содержимое по горизонтали */
+    justify-content: center; /* Центрируем содержимое по вертикали */
+    text-align: center; /* Центрируем текст */
+}
+
+/* Заголовок "Вы действительно хотите удалить игрока?" */
+.delete-confirmation {
+    width: 1156px; /* Ширина заголовка */
+    height: 40px; /* Высота заголовка */
+    font-family: 'Unbounded', sans-serif; /* Шрифт заголовка */
+    font-style: normal; /* Нормальный стиль шрифта */
+    font-weight: 400; /* Нормальное начертание */
+    font-size: 40px; /* Размер шрифта */
+    line-height: 40px; /* Высота строки */
+    color: #000000; /* Цвет текста */
+    margin-bottom: 40px; /* Отступ снизу от заголовка */
+}
+
+/* Контейнер для кнопок "Да" и "Нет" */
+.buttons-container {
+    display: flex; /* Используем flexbox для горизонтального расположения кнопок */
+    justify-content: center; /* Центрируем кнопки по горизонтали */
+    gap: 200px; /* Промежуток между кнопками */
+    margin-top: 50px; /* Отступ сверху (расстояние между заголовком и кнопками) */
+}
+
+/* Rectangle 114 - Кнопка "Да" */
+.rectangle-114,
+.rectangle-115 {
+    box-sizing: border-box;
+    width: 304px; /* Ширина кнопки */
+    height: 68px; /* Высота кнопки */
+    background: #FEF8E7; /* Цвет фона кнопки */
+    border: 1px solid #000000; /* Цвет границы */
+    border-radius: 20px; /* Закругление углов */
+    display: flex; /* Используем flexbox для центрирования текста */
+    justify-content: center; /* Центрируем текст по горизонтали */
+    align-items: center; /* Центрируем текст по вертикали */
+    cursor: pointer; /* Меняем курсор на указатель при наведении */
+    transition: background 0.3s; /* Плавный переход цвета фона */
+}
+
+/* Эффекты при наведении на кнопки */
+.rectangle-114:hover {
+    background: #D4EDDA; /* Цвет фона при наведении на "Да" */
+}
+
+.rectangle-115:hover {
+    background: #F8D7DA; /* Цвет фона при наведении на "Нет" */
+}
+
+/* Текст "Да" */
+.confirm {
+    font-family: 'Unbounded', sans-serif; /* Шрифт текста */
+    font-style: normal; /* Нормальный стиль шрифта */
+    font-weight: 400; /* Нормальное начертание */
+    font-size: 24px; /* Размер шрифта */
+    line-height: 40px; /* Высота строки */
+    color: #000000; /* Цвет текста */
+}
+
+/* Текст "Нет" */
+.cancel {
+    font-family: 'Unbounded', sans-serif; /* Шрифт текста */
+    font-style: normal; /* Нормальный стиль шрифта */
+    font-weight: 400; /* Нормальное начертание */
+    font-size: 24px; /* Размер шрифта */
+    line-height: 40px; /* Высота строки */
+    color: #000000; /* Цвет текста */
+}
