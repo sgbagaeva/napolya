@@ -17,10 +17,10 @@
 </head>
 
 <body>
-    <div class="game-layout">
 
+    <div class="game-layout">
         <!-- Кнопка "Назад" размещается слева -->
-        <button class="back-btn">← Назад</button>
+        <button class="back-btn" id="backButton">← Назад</button>
 
         <!-- Блоки управления с кнопками Редактировать и Сохранить -->
         <div class="edit-block">
@@ -47,12 +47,19 @@
         </div>
     </div>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
             var descriptionHeight = $('.description-block').outerHeight();
             $('.line-15').height(descriptionHeight);
+
+            // Добавляем обработчик события для кнопки "Назад"
+            $('#backButton').click(function() {
+                window.location.href = 'admin.html'; // Замените на правильный путь к index.html
+            });
         });
     </script>
+
 </body>
 
 </html>
