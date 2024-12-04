@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script th:src="@{/js/script.js}"></script> <!-- Используем Thymeleaf для подключения JS -->
     <title>Управление играми</title>
 </head>
 <body>
@@ -17,7 +18,7 @@
         <h2 class="photo-title">Управление играми</h2>
         <ul class="photo-list">
             <li class="photo-item">
-                <a th:href="@{/static/edit-game.html}"> <!-- Используем th:href -->
+                <a th:href="@{/edit-game.html}"> <!-- Используем th:href -->
                     <img th:src="@{/elements/game-image1.png}" alt="Описание фотографии 1" class="photo-image"> <!-- Используем th:src -->
                 </a>
             </li>
@@ -34,8 +35,6 @@
         </ul>
     </div>
 </div>
-
-<script th:src="@{/js/script.js}"></script> <!-- Используем Thymeleaf для подключения JS -->
 </body>
 </html>
 

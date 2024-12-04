@@ -63,12 +63,6 @@ public class PlayerController {
         return "redirect:/admin"; // Перенаправление на главную страницу пользователя после успешной регистрации
     }
 
-    @GetMapping("/admin")
-    public String showAdminPage(Model model, @ModelAttribute("adminName") String adminName) {
-        model.addAttribute("adminName", adminName); // Передаем имя администратора в модель
-        return "admin"; // Возвращаем страницу администратора
-    }
-
     /*
     @GetMapping("/logout")
     public String logout() {

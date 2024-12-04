@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script th:src="@{/js/script.js}"></script> <!-- Используем Thymeleaf для подключения JS -->
     <title>Главная страница администратора</title>
 </head>
 
@@ -26,17 +27,17 @@
 <!-- Основная область работы -->
 <div class="sidebar">
     <p></p>
-    <a th:href="@{/games}" class="sidebar-item" data-content="games.html">Управление играми</a>
+    <a th:href="@{/games}" class="sidebar-item">Управление играми</a>
     <hr class="sidebar-divider">
-    <a th:href="@{/fields.html}" class="sidebar-item" data-content="fields.html">Управление полями</a>
+    <a th:href="@{/fields}" class="sidebar-item">Управление полями</a>
     <hr class="sidebar-divider">
-    <a th:href="@{/manage-players.html}" class="sidebar-item" data-content="manage-players.html">Управление игроками</a>
+    <a th:href="@{/manage-players}" class="sidebar-item">Управление игроками</a>
     <hr class="sidebar-divider">
-    <a th:href="@{/my-games.html}" class="sidebar-item" data-content="my-games.html">Мои игры</a>
+    <a th:href="@{/my-games}" class="sidebar-item">Мои игры</a>
     <hr class="sidebar-divider">
-    <a th:href="@{/contacts.html}" class="sidebar-item" data-content="contacts.html">Контакты</a>
+    <a th:href="@{/contacts}" class="sidebar-item">Контакты</a>
     <hr class="sidebar-divider">
-    <a th:href="@{/profile.html}" class="sidebar-item" data-content="profile.html">Профиль</a>
+    <a th:href="@{/profile}" class="sidebar-item">Профиль</a>
     <hr class="sidebar-divider">
 </div>
 
@@ -44,8 +45,6 @@
 <div class="main-content" id="main-content">
     <!-- Здесь будет загружено содержимое других страниц -->
 </div>
-
-<script th:src="@{/js/script.js}"></script> <!-- Подключаем скрипт -->
 </body>
 </html>
 
