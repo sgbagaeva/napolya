@@ -1,8 +1,15 @@
 package com.example.napolya.repositories;
 
 import com.example.napolya.model.Player;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface PlayerRepository extends JpaRepository<Player, Integer> {
-    Player findByEmail(String email); // Находим игрока по электронной почте
+import java.util.Optional;
+
+@Repository
+public interface PlayerRepository extends CrudRepository<Player, Integer> {
+    // Метод для поиска игрока по email
+    Optional<Player> findByEmail(String email);
+    // Метод для поиска игрока по email
+    Optional<Player> findByName(String name);
 }

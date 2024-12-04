@@ -1,12 +1,10 @@
 package com.example.napolya.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.annotation.Generated;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -16,11 +14,9 @@ import java.util.Objects;
 /**
  * Player
  */
-@Entity
-@Table(name = "players")
+@Table(name = "player")
 public class Player   {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @JsonProperty("id")
   private Integer id;
 
@@ -37,20 +33,23 @@ public class Player   {
   private String password;
 
   @JsonProperty("role")
-  private String role;
+  private String role = "ADMIN";
 
   @JsonProperty("registration_date")
-  @org.springframework.format.annotation.DateTimeFormat(iso = org.springframework.format.annotation.DateTimeFormat.ISO.DATE_TIME)
+  @Column("registration_date")
+  @DateTimeFormat
   private LocalDateTime registrationDate;
 
   @JsonProperty("rating")
-  private Integer rating;
+  private Integer rating = 0;
 
+  /*
   @JsonProperty("games_ids")
   private List<Integer> gamesIds = null;
-
+   */
   @JsonProperty("entries_amount")
-  private Integer entriesAmount;
+  @Column("entries_amount")
+  private Integer entriesAmount = 0;
 
   public Player id(Integer id) {
     this.id = id;
@@ -203,6 +202,7 @@ public class Player   {
     this.rating = rating;
   }
 
+  /*
   public Player gamesIds(List<Integer> gamesIds) {
     this.gamesIds = gamesIds;
     return this;
@@ -216,12 +216,14 @@ public class Player   {
     return this;
   }
 
+   */
+
   /**
    * Список id игр, на которые записан игрок
    * @return gamesIds
   */
 
-
+  /*
   public List<Integer> getGamesIds() {
     return gamesIds;
   }
@@ -229,6 +231,7 @@ public class Player   {
   public void setGamesIds(List<Integer> gamesIds) {
     this.gamesIds = gamesIds;
   }
+  */
 
   public Player entriesAmount(Integer entriesAmount) {
     this.entriesAmount = entriesAmount;
@@ -267,7 +270,7 @@ public class Player   {
         Objects.equals(this.role, player.role) &&
         Objects.equals(this.registrationDate, player.registrationDate) &&
         Objects.equals(this.rating, player.rating) &&
-        Objects.equals(this.gamesIds, player.gamesIds) &&
+        //Objects.equals(this.gamesIds, player.gamesIds) &&
         Objects.equals(this.entriesAmount, player.entriesAmount);
   }
 
@@ -277,7 +280,7 @@ public class Player   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, surname, email, password, role, registrationDate, rating, gamesIds, entriesAmount);
+    return Objects.hash(id, name, surname, email, password, role, registrationDate, rating, /*gamesIds,*/ entriesAmount);
   }
 
   private static <T> int hashCodeNullable(T a) {
@@ -297,7 +300,7 @@ public class Player   {
     sb.append("    role: ").append(toIndentedString(role)).append("\n");
     sb.append("    registrationDate: ").append(toIndentedString(registrationDate)).append("\n");
     sb.append("    rating: ").append(toIndentedString(rating)).append("\n");
-    sb.append("    gamesIds: ").append(toIndentedString(gamesIds)).append("\n");
+    //sb.append("    gamesIds: ").append(toIndentedString(gamesIds)).append("\n");
     sb.append("    entriesAmount: ").append(toIndentedString(entriesAmount)).append("\n");
     sb.append("}");
     return sb.toString();

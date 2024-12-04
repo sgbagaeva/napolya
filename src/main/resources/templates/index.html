@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Исправил 'inital' на 'initial' -->
+    <title>Na polya</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script th:src="@{/js/script.js}"></script>
+</head>
+<body>
+<div id="container" class="flex-column">
+    <section id="main" class="flex-column">
+        <div id="header" class="flex-row">
+            <a th:href="@{/}">
+                <img class="logoIcon icon" th:src="@{/elements/logo.svg}" alt="Логотип">
+            </a>
+            <ul class="navigation flex-row">
+                <li><a th:href="@{/registration}">записаться на игру</a></li>
+                <li><a href="/index.html#photos">фотографии</a></li>
+                <li><a href="index.html#footer">контакты</a></li>
+                <li><a th:href="@{/login}">войти</a></li>
+            </ul>
+        </div>
+        <div id="mainInfoWrapper" class="flex-row">
+            <div id="mainTextWrapper" class="flex-column">
+                <p id="mainHeadlineText">НА ПОЛЯ!</p>
+                <div id="mainDescAndBtnWrapper" class="flex-column">
+                    <p id="mainDescText">Присоединяйтесь к нашему <br>сообществу игроков!<br>Выбирайте поля и <br>записывайтесь в команды!</p>
+                    <p id="signUpForGameBtn">записаться на игру!</p>
+                </div>
+            </div>
+            <img id="mainPhoto" th:src="@{/elements/mainPhoto.png}" alt="Главное фото">
+        </div>
+    </section>
+
+    <div class="photo-section">
+        <h2 class="photo-title">ФОТОГРАФИИ</h2>
+        <ul class="photo-list">
+            <li class="photo-item">
+                <img th:src="@{/elements/photo1.png}" alt="Описание фотографии 1" class="photo-image">
+            </li>
+            <li class="photo-item">
+                <img th:src="@{/elements/photo2.png}" alt="Описание фотографии 2" class="photo-image">
+            </li>
+            <li class="photo-item">
+                <img th:src="@{/elements/photo3.png}" alt="Описание фотографии 3" class="photo-image">
+            </li>
+            <li class="photo-item">
+                <img th:src="@{/elements/photo4.png}" alt="Описание фотографии 2" class="photo-image">
+            </li>
+            <li class="photo-item">
+                <img th:src="@{/elements/photo5.png}" alt="Описание фотографии 3" class="photo-image">
+            </li>
+        </ul>
+    </div>
+
+    <section id="footer" class="flex-column">
+        <ul class="navigation flex-row">
+            <li><a href="index.html#signUpForGame">записаться на игру</a></li>
+            <li><a href="index.html#photos">фотографии</a></li>
+            <li><a href="index.html#footer">контакты</a></li>
+            <li><a th:href="@{/login}">войти</a></li>
+        </ul>
+        <div id="socialMediaWrapper">
+            <img class="socialMediaIcon icon" th:src="@{/elements/telegramIcon.svg}" alt="Telegram">
+            <img class="socialMediaIcon icon" th:src="@{/elements/VKIcon.svg}" alt="VK">
+            <img class="socialMediaIcon icon" th:src="@{/elements/mailIcon.svg}" alt="Email">
+        </div>
+        <a th:href="@{/}">
+            <img class="logoIcon icon" th:src="@{/elements/logo.svg}" alt="Логотип"></img>
+        </a>
+    </section>
+</div>
+</body>
+</html>

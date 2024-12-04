@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style-form.css}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script th:src="@{/js/login.js}"></script> <!-- Смена имени файла -->
+
+    <title>Регистрация</title>
+</head>
+<body>
+<div class="registration-container">
+    <h1 class="registration-title">Регистрация</h1>
+    <form class="registration-form" action="#" th:action="@{/registration}" method="post" th:object="${player}">
+        <div class="input-group">
+            <label for="name" class="input-label">Введите имя</label>
+            <input type="text" id="name" class="input-field" th:field="*{name}" required>
+        </div>
+        <div class="input-group">
+            <label for="surname" class="input-label">Введите фамилию</label>
+            <input type="text" id="surname" class="input-field" th:field="*{surname}" required>
+        </div>
+        <div class="input-group">
+            <label for="email" class="input-label">Введите почту</label>
+            <input type="email" id="email" class="input-field" th:field="*{email}" required>
+        </div>
+        <div class="input-group">
+            <label for="password" class="input-label">Введите пароль</label>
+            <input type="password" id="password" class="input-field" th:field="*{password}" required>
+            <!-- <span class="password-eye" onclick="togglePasswordVisibility()">👁️</span> -->
+        </div>
+        <button type="submit" class="submit-button">Зарегистрироваться</button>
+        <p class="login-prompt">Уже есть аккаунт? <a th:href="@{/login}" class="login-link">Войти</a></p>
+    </form>
+    <div th:if="${errorMessage}" style="color:red;">[[${errorMessage}]]</div> <!-- Сообщение об ошибке -->
+</div>
+
+<!-- Кнопка для возврата на главную -->
+<button class="back-button" onclick="goToHomePage()">← На главную</button>
+</body>
+</html>
