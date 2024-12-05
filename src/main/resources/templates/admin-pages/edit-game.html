@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script th:src="@{/js/script.js}"></script> <!-- Используем Thymeleaf для подключения JS -->
+    <script th:src="@{/js/manage-game.js}"></script> <!-- Используем Thymeleaf для подключения JS -->
 
     <title>Макет Игры</title>
 </head>
@@ -34,31 +34,30 @@
     <div class="content-container">
         <div class="line-15"></div>
         <div class="description-block">
-            Здесь будет текст описания игры.
+            И, как обычно, в начале декабря будет игра в честь
+            <span class="highlight">Дня Рождения ПЕТРОВа (Леве – 70!!!)</span>,
+            которая состоится в <span class="highlight">восчкресенье, 8 декабря в 12-00
+            в Гатчинском футбольном манеже</span>
+            (город Гатчина, улица Новоселов, 8Б).
+            <p>Это будет не просто игра – это День Гатчины на Поляне.
+                Приглашаются все желающие поздравить именинника и обыграть его на футбольном поле.</p>
+            <p> Приходите все! </p>
         </div>
     </div>
 
-    <div class="additional-info-block">Блок с дополнительной информацией</div>
+    <div class="additional-info-block"><!-- Блоки с дополнительной информацией --></div>
 
-    <div class="game-images">
+    <!-- <div class="game-images">
         <div class="game-image" style="background-image: url('@{/images/14058.jpg}');"></div>
         <div class="game-image" style="background-image: url('@{/images/28378.jpg}');"></div>
         <div class="game-image" style="background-image: url('@{/images/27355.jpg}');"></div>
+    </div>  -->
+
+    <!-- Блоки управления с кнопкой Записаться на игру -->
+    <div class="edit-block">
+        <button class="btn rectangle-112">Записаться на игру</button>
     </div>
+    <p></p>
 </div>
-
-<script>
-    $(document).ready(function () {
-        var descriptionHeight = $('.description-block').outerHeight();
-        $('.line-15').height(descriptionHeight);
-
-        // Добавляем обработчик события для кнопки "Назад"
-        $('#backButton').click(function() {
-            window.location.href = '@{/admin}';
-        });
-    });
-</script>
-
 </body>
-
 </html>

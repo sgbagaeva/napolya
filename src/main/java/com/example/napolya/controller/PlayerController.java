@@ -2,6 +2,7 @@ package com.example.napolya.controller;
 
 import com.example.napolya.model.Player;
 import com.example.napolya.repositories.PlayerRepository;
+import com.example.napolya.services.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 public class PlayerController {
 
     @Autowired
-    private PlayerRepository playerRepository;
+    private PlayerService playerService;
 
     @GetMapping("/") // Главная страница
     public String index() {
@@ -26,7 +27,7 @@ public class PlayerController {
     @PostMapping("/registration")
     public String registerPlayer(@ModelAttribute Player player, Model model) {
         // Проверка на существующего пользователя
-        if (playerRepository.findByEmail(player.getEmail()).isPresent()) {
+        if (playerService.findByEmail(player.getEmail()).isPresent()) {
             model.addAttribute("errorMessage", "Ошибка: Пользователь с таким email уже существует.");
             return "registration"; // Возвращение на страницу регистрации с сообщением об ошибке
         }
@@ -34,7 +35,7 @@ public class PlayerController {
         // Хэширование пароля (для безопасности)
 
         // Сохранение нового игрока в БД
-        playerRepository.save(player);
+        playerService.createPlayer(player);
 
         model.addAttribute("adminName", player.getName()); // Сохраняем имя администратора в модели
         return "redirect:/admin"; // Перенаправление на страницу администратора после успешной регистрации
@@ -50,7 +51,7 @@ public class PlayerController {
     @PostMapping("/login")
     public String loginPlayer(@ModelAttribute Player player, Model model) {
         // Проверка на существующего пользователя
-        Player existingPlayer = playerRepository.findByName(player.getName()).orElse(null);
+        Player existingPlayer = playerService.findByName(player.getName()).orElse(null);
 // ВАЖНО - добавить обработку при совпадении имён
         if (existingPlayer == null || !existingPlayer.getPassword().equals(player.getPassword())) {
             model.addAttribute("errorMessage", "Ошибка: Неверное имя пользователя или пароль");
