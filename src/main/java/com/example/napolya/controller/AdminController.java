@@ -33,7 +33,7 @@ public class AdminController {
 
         if (userId != null) {
             // Здесь вы можете использовать userId для получения дополнительной информации о пользователе (например, через PlayerService)
-            Player player = playerService.getPlayerById(userId).orElse(null);
+            Player player = playerService.findById(userId).orElse(null);
             model.addAttribute("player", player); // Передаем объект игрока в модель
         }
 
@@ -45,14 +45,14 @@ public class AdminController {
 
     @GetMapping("/games")
     public String listGames(Model model) {
-        List<Game> games = gameService.getAllGames();
+        List<Game> games = gameService.findAll();
         model.addAttribute("games", games); // используйте "games"
         return "admin-pages/games"; // возвращаем имя шаблона
     }
 
     @GetMapping("/games/{id}")
     public String getGameDetails(@PathVariable("id") Integer gameId, Model model) {
-        Game game = gameService.getGameById(gameId).orElse(null);
+        Game game = gameService.findById(gameId).orElse(null);
         if (game != null) {
             model.addAttribute("game", game);
             return "games/admin-game"; // Имя шаблона Thymeleaf
@@ -61,23 +61,29 @@ public class AdminController {
     }
 
     @GetMapping("/gameSignUp")
-    public String signUpForGame(@RequestParam("gameId") Integer gameId, Model model) {
+    public String signUpForGame(@RequestParam("gameId") Integer gameId, HttpSession session) {
 
-        // Ваша логика по почте и подписке на игру с gameId
+        // Извлекаем id пользователя из сессии
+        Integer userId = (Integer) session.getAttribute("userId");
+
+        if (userId != null) {
+            Player player = playerService.findById(userId).orElse(null);
+            //
+        }
 
         return "game-signUp-success";  // Перенаправление на страницу успеха регистрации
     }
 
     @GetMapping("/fields")
     public String listFields(Model model) {
-        List<Field> fields = fieldService.getAllFields();
+        List<Field> fields = fieldService.findAll();
         model.addAttribute("fields", fields);
         return "admin-pages/fields"; // возвращаем имя шаблона
     }
 
     @GetMapping("/admin-field/{id}")
     public String getFieldDetails(@PathVariable("id") Integer fieldId, Model model) {
-        Field field = fieldService.getFieldById(fieldId).orElse(null);
+        Field field = fieldService.findById(fieldId).orElse(null);
         if (field != null) {
             model.addAttribute("field", field);
             return "games/admin-field"; // Имя шаблона Thymeleaf

@@ -7,8 +7,6 @@ import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -36,7 +34,7 @@ public class Player   {
   private String role = "ADMIN";
 
   @JsonProperty("registration_date")
-  @Column("registration_date")
+  //@Column("registration_date")
   @DateTimeFormat
   private LocalDateTime registrationDate;
 

@@ -68,13 +68,12 @@ public class Main implements CommandLineRunner {
         // Создание нового экземпляра класса Field
         Field field = new Field();
 
-        field.setId(1); // Установка ID поля
         field.setName("Основное футбольное поле"); // Установка имени поля
         field.setDescription("Широкое футбольное поле с натуральным травяным покрытием, идеальное для игр."); // Установка описания поля
         field.setLocation("Гатчинский футбольный манеж, улица Новоселов, 8Б, Гатчина"); // Установка местоположения поля
         field.setProviderId(2); // ID поставщика (например, ID организации, которая предоставляет поле)
 
-        //System.out.println(fieldService.getAllFields());
+        //System.out.println(fieldService.findAll());
     }
 }
 

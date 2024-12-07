@@ -12,7 +12,6 @@ import java.util.Objects;
  */
 @Table(name = "team_game")
 public class TeamGame {
-
     @Id
     @JsonProperty("id")
     private Integer id;

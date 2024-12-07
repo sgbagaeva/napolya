@@ -12,6 +12,7 @@ import java.util.Objects;
 /**
  * Team
  */
+//@Entity
 @Table(name = "team")
 public class Team {
     @Id

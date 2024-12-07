@@ -10,6 +10,7 @@ import java.util.Objects;
 /**
  * Provider
  */
+//@Entity
 @Table(name = "provider")
 public class Provider {
 

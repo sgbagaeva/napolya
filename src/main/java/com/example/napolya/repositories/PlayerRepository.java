@@ -8,8 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface PlayerRepository extends CrudRepository<Player, Integer> {
+    Optional<Player> findByName(String name);
     // Метод для поиска игрока по email
     Optional<Player> findByEmail(String email);
-    // Метод для поиска игрока по имени
-    Optional<Player> findByName(String name);
 }
