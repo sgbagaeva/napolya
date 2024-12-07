@@ -1,13 +1,13 @@
 package com.example.napolya;
 
+import com.example.napolya.model.Field;
 import com.example.napolya.model.Game;
 import com.example.napolya.model.Player;
-import com.example.napolya.repositories.PlayerRepository;
-
 
 import java.time.LocalDateTime;
-import java.util.Optional;
+import java.time.Month;
 
+import com.example.napolya.services.FieldService;
 import com.example.napolya.services.GameService;
 import com.example.napolya.services.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +23,9 @@ public class Main implements CommandLineRunner {
     @Autowired
     private GameService gameService;
 
+    @Autowired
+    private FieldService fieldService;
+
     @Override
     public void run(String... args) throws Exception {
 
@@ -30,31 +33,48 @@ public class Main implements CommandLineRunner {
 
         // Ваш код для создания и сохранения игрока
         Player player = new Player();
-        player.setName("John");
-        player.setSurname("Doe");
-        player.setEmail("john.doe@example.com");
-        player.setPassword("password"); // НИКОГДА не храните пароли в открытом виде!
-        player.setRole("USER");
+        player.setName("Ира");
+        player.setSurname("Багаева");
+        player.setEmail("ira@example.com");
+        player.setPassword("pass"); // НИКОГДА не храните пароли в открытом виде!
+        player.setRole("PLAYER");
         player.setRegistrationDate(LocalDateTime.now());
         player.setRating(0);
         player.setEntriesAmount(0);
 
-        playerService.createPlayer(player);
-        System.out.println("Player saved: " + player.getName() + " " + player.getSurname());
+        //playerService.savePlayer(player);
+        //System.out.println("Player saved: " + player.getName() + " " + player.getSurname());
 
         Game game = new Game();
-        game.setName("Adventure Game");
-        game.setDescription("An exciting adventure game with many challenges.");
-        game.setStartDate(LocalDateTime.now().plusDays(1)); // Например, игра начинается через 1 день
-        game.setStatus(Game.StatusEnum.valueOf("активная"));
+        game.setName("Праздничная игра");
+        game.setDescription("И, как обычно, в начале декабря будет игра в честь Дня Рождения ПЕТРОВа " +
+                "(Леве – 70!!!), которая состоится в восчкресенье, 8 декабря в 12-00 в " +
+                "Гатчинском футбольном манеже (город Гатчина, улица Новоселов, 8Б). " +
+                "Это будет не просто игра – это День Гатчины на Поляне. " +
+                "Приглашаются все желающие поздравить именинника и обыграть его на футбольном поле. " +
+                "Приходите все!");
+        game.setStartDate(LocalDateTime.of(2024, Month.DECEMBER, 8, 12, 0));
+        game.setStatus("активная");
         game.setCreatorId(1); // ID создателя игры (например, ID игрока или пользователя)
         game.setFieldId(2); // ID поля (например, ID игрового поля или локации)
         game.setQueueId(3); // ID очереди (например, ID очереди, если у вас есть система очередей)
 
         // Сохранение игры
-        //gameService.createGame(game);
+        //gameService.saveGame(game);
 
         //System.out.println("Game saved: " + game.getName() + ", Description: " + game.getDescription());
+        //System.out.println(gameService.getAllGames());
+
+        // Создание нового экземпляра класса Field
+        Field field = new Field();
+
+        field.setId(1); // Установка ID поля
+        field.setName("Основное футбольное поле"); // Установка имени поля
+        field.setDescription("Широкое футбольное поле с натуральным травяным покрытием, идеальное для игр."); // Установка описания поля
+        field.setLocation("Гатчинский футбольный манеж, улица Новоселов, 8Б, Гатчина"); // Установка местоположения поля
+        field.setProviderId(2); // ID поставщика (например, ID организации, которая предоставляет поле)
+
+        //System.out.println(fieldService.getAllFields());
     }
 }
 

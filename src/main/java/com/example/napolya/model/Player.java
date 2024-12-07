@@ -118,7 +118,6 @@ public class Player   {
    * @return email
   */
 
-
   public String getEmail() {
     return email;
   }
@@ -272,10 +271,6 @@ public class Player   {
         Objects.equals(this.rating, player.rating) &&
         //Objects.equals(this.gamesIds, player.gamesIds) &&
         Objects.equals(this.entriesAmount, player.entriesAmount);
-  }
-
-  private static <T> boolean equalsNullable(T a, T b) {
-    return (a == b) || (a != null && b != null && a.equals(b));
   }
 
   @Override

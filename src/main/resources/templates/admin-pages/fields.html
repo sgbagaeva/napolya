@@ -17,21 +17,15 @@
     <div class="photo-section">
         <h2 class="photo-title">Управление полями</h2>
         <ul class="photo-list">
-            <li class="photo-item">
-                <a th:href="@{/edit-game}">
-                    <img th:src="@{/elements/field-image1.png}" alt="Описание фотографии 1" class="photo-image">
+            <li class="photo-item" th:each="field : ${fields}">
+                <a th:href="@{/admin-field/{id}(id=${field.id})}">
+                    <img th:attr="src=@{'/elements/field-images/' + ${field.id} + '.png'},
+                          title='Изображение поля с ID: ' + ${field.id},
+                          alt='Изображение поля с ID: ' + ${field.id}"
+                         class="photo-image" />
                 </a>
             </li>
-            <li class="photo-item">
-                <a th:href="@{/game2.html}">
-                    <img th:src="@{/elements/field-image2.png}" alt="Описание фотографии 2" class="photo-image">
-                </a>
-            </li>
-            <li class="photo-item">
-                <a th:href="@{/game1.html}">
-                    <img th:src="@{/elements/elements/field-image1.png}" alt="Описание фотографии 1" class="photo-image">
-                </a>
-            </li>
+
         </ul>
     </div>
 </div>

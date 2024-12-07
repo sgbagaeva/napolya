@@ -1,11 +1,14 @@
 package com.example.napolya.services;
 
 import com.example.napolya.model.Game;
+import com.example.napolya.model.Game;
+import com.example.napolya.model.Player;
 import com.example.napolya.repositories.GameRepository;
-import com.example.napolya.repositories.PlayerRepository;
+import com.example.napolya.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,15 +21,16 @@ public class GameService {
         this.gameRepository = gameRepository;
     }
 
-    // Метод для создания новой игры
-    public void createGame(Game game) {
-        // Вы можете добавить любую логику валидации, если нужно
-        gameRepository.save(game);
+    // Метод для сохранения новой игры
+    public Game saveGame(Game game) {
+        return gameRepository.save(game);
     }
 
     // Метод для получения всех игр
     public List<Game> getAllGames() {
-        return (List<Game>) gameRepository.findAll(); // Преобразование Iterable в List
+        List<Game> games = new ArrayList<>();
+        gameRepository.findAll().forEach(games::add);
+        return games;
     }
 
     // Метод для получения игры по ID
@@ -50,4 +54,10 @@ public class GameService {
         }
         gameRepository.deleteById(id);
     }
+
+    // Метод для поиска игрока по названию
+    public Optional<Game> findByName(String name) {
+        return gameRepository.findByName(name);
+    }
 }
+

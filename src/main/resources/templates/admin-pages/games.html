@@ -17,21 +17,15 @@
     <div class="photo-section">
         <h2 class="photo-title">Управление играми</h2>
         <ul class="photo-list">
-            <li class="photo-item">
-                <a th:href="@{/admin/games/edit-game}"> <!-- Используем th:href -->
-                    <img th:src="@{/elements/game-image1.png}" alt="Описание фотографии 1" class="photo-image"> <!-- Используем th:src -->
+            <li class="photo-item" th:each="game : ${games}">
+                <a th:href="@{/admin/games/{id}(id=${game.id})}">
+                    <img th:attr="src=@{'/elements/game-images/' + ${game.id} + '.png'},
+                          title='Изображение игры с ID: ' + ${game.id},
+                          alt='Изображение игры с ID: ' + ${game.id}"
+                         class="photo-image" />
                 </a>
             </li>
-            <li class="photo-item">
-                <a th:href="@{/game2.html}"> <!-- Используем th:href -->
-                    <img th:src="@{/elements/game-image2.png}" alt="Описание фотографии 2" class="photo-image"> <!-- Используем th:src -->
-                </a>
-            </li>
-            <li class="photo-item">
-                <a th:href="@{/game1.html}"> <!-- Используем th:href -->
-                    <img th:src="@{/elements/game-image1.png}" alt="Описание фотографии 1" class="photo-image"> <!-- Используем th:src -->
-                </a>
-            </li>
+
         </ul>
     </div>
 </div>

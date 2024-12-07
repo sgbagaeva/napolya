@@ -16,7 +16,7 @@ import java.util.Objects;
 /**
  * Game
  */
-@Table(name = "games")
+@Table(name = "game")
 public class Game   {
   @Id
   @JsonProperty("id")
@@ -35,41 +35,9 @@ public class Game   {
   /**
    * Статус игры
    */
-  public enum StatusEnum {
-    PENDING("ожидание"),
-    ACTIVE("активная"),
-    COMPLETED("завершена"),
-    CLOSED("запись закрыта");
-
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    @JsonValue
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static StatusEnum fromValue(String value) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-  }
 
   @JsonProperty("status")
-  private StatusEnum status;
+  private String status;
 
   @JsonProperty("creator_id")
   private Integer creatorId;
@@ -83,10 +51,12 @@ public class Game   {
   @JsonProperty("queue_id")
   private Integer queueId;
 
+
   public Game id(Integer id) {
     this.id = id;
     return this;
   }
+
 
   /**
    * Уникальный идентификатор игры
@@ -161,7 +131,7 @@ public class Game   {
     this.startDate = startDate;
   }
 
-  public Game status(StatusEnum status) {
+  public Game status(String status) {
     this.status = status;
     return this;
   }
@@ -172,11 +142,11 @@ public class Game   {
   */
 
 
-  public StatusEnum getStatus() {
+  public String getStatus() {
     return status;
   }
 
-  public void setStatus(StatusEnum status) {
+  public void setStatus(String status) {
     this.status = status;
   }
 

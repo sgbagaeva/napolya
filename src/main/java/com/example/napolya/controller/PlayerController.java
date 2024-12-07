@@ -35,7 +35,7 @@ public class PlayerController {
         // Хэширование пароля (для безопасности)
 
         // Сохранение нового игрока в БД
-        playerService.createPlayer(player);
+        playerService.savePlayer(player);
 
         model.addAttribute("adminName", player.getName()); // Сохраняем имя администратора в модели
         return "redirect:/admin"; // Перенаправление на страницу администратора после успешной регистрации

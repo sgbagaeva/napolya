@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style-game.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script th:src="@{/js/manage-game.js}"></script>
+    <title>Макет Игры</title>
+</head>
+
+<body>
+<div class="game-layout">
+    <button class="back-btn" id="backButton">← Назад</button>
+
+    <div class="edit-block">
+        <button class="btn rectangle-112">Редактировать</button>
+        <button class="btn rectangle-113">Сохранить изменения</button>
+    </div>
+
+    <!-- Заголовок игры с использованием данных из модели -->
+    <div class="game-title" th:text="${game.name}">Название игры</div>
+
+    <div class="content-container">
+        <div class="line-15"></div>
+        <div class="description-block">
+            <!-- Описание игры также со значением из модели -->
+            <p th:text="${game.description}">Описание игры...</p>
+        </div>
+    </div>
+
+    <div class="additional-info-block"></div>
+
+    <!-- Блоки управления с кнопкой Записаться на игру -->
+    <div class="edit-block">
+        <button class="btn rectangle-112">Записаться на игру</button>
+    </div>
+    <p></p>
+</div>
+</body>
+</html>
+

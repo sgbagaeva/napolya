@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,15 +19,16 @@ public class PlayerService {
         this.playerRepository = playerRepository;
     }
 
-    // Метод для создания нового игрока
-    public Player createPlayer(Player player) {
-        // Вы можете добавить любую логику валидации, если нужно
+    // Метод для сохранения нового игрока
+    public Player savePlayer(Player player) {
         return playerRepository.save(player);
     }
 
     // Метод для получения всех игроков
     public List<Player> getAllPlayers() {
-        return (List<Player>) playerRepository.findAll(); // Преобразование Iterable в List
+        List<Player> players = new ArrayList<>();
+        playerRepository.findAll().forEach(players::add);
+        return players;
     }
 
     // Метод для получения игрока по ID
