@@ -35,11 +35,11 @@
 
     <div class="additional-info-block"></div>
 
-    <!-- Блоки управления с кнопкой Записаться на игру -->
+    <!-- Блоки управления с ссылкой Записаться на игру -->
     <div class="edit-block">
-        <button class="btn rectangle-112">Записаться на игру</button>
+        <a th:href="@{/admin/gameSignUp(gameId=${game.id})}" class="btn rectangle-112">Записаться на игру</a>
     </div>
-    <p></p>
+
 </div>
 </body>
 </html>

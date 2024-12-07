@@ -18,8 +18,8 @@
 <div class="header">
     <div class="avatar"></div> <!-- Круглый аватар -->
     <!-- НЕ РАБОТАЕТ -->
-    <div class="header-title" th:text="${adminName}">Имя</div>
-    <div class="header-title">Администратор</div>
+    <div class="header-title" th:text="${player.name}">Имя</div>
+    <div class="header-title" th:text="${player.role}">Администратор</div>
     <div class="edit-btn">Редактировать</div>
     <div class="notifications">Уведомления</div>
 </div>

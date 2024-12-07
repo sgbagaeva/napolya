@@ -3,6 +3,7 @@ package com.example.napolya.controller;
 import com.example.napolya.model.Player;
 import com.example.napolya.repositories.PlayerRepository;
 import com.example.napolya.services.PlayerService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,7 +50,7 @@ public class PlayerController {
 
 
     @PostMapping("/login")
-    public String loginPlayer(@ModelAttribute Player player, Model model) {
+    public String loginPlayer(@ModelAttribute Player player, HttpSession session, Model model) {
         // Проверка на существующего пользователя
         Player existingPlayer = playerService.findByName(player.getName()).orElse(null);
 // ВАЖНО - добавить обработку при совпадении имён
@@ -58,8 +59,8 @@ public class PlayerController {
             return "login"; // Возвращаем на страницу логина с сообщением об ошибке
         }
 
-        // Если логин успешен, перенаправляем на страницу администратора
-        model.addAttribute("adminName", existingPlayer.getName()); // Сохраняем имя администратора для отображения
+        // Сохраняем id пользователя в сессии
+        session.setAttribute("userId", existingPlayer.getId());
 
         return "redirect:/admin"; // Перенаправление на главную страницу пользователя после успешной регистрации
     }

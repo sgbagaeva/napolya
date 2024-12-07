@@ -29,8 +29,8 @@ body {
     width: 100px; /* Ширина аватара */
     height: 100px; /* Высота аватара */
     border-radius: 50%; /* Круглая форма */
-    background-image: url('../elements/avatar.jpg'); 
-    /* background-color: aquamarine; */
+    /* background-image: url('../elements/avatar.jpg'); */
+    background-color: #FEF8E7;
     background-size: cover; /* Покрывает весь элемент */
     background-position: center; /* Центрируем изображение */
     margin-right: 10px; /* Отступ справа от аватара */

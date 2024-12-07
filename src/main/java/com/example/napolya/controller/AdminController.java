@@ -2,15 +2,15 @@ package com.example.napolya.controller;
 
 import com.example.napolya.model.Field;
 import com.example.napolya.model.Game;
+import com.example.napolya.model.Player;
 import com.example.napolya.services.FieldService;
 import com.example.napolya.services.GameService;
+import com.example.napolya.services.PlayerService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,14 +19,24 @@ import java.util.List;
 public class AdminController {
 
     @Autowired
+    private PlayerService playerService;
+    @Autowired
     private GameService gameService;
 
     @Autowired
     private FieldService fieldService;
 
     @GetMapping()
-    public String showAdminPage(Model model, @ModelAttribute("adminName") String adminName) {
-        model.addAttribute("adminName", adminName); // Передаем имя администратора в модель
+    public String showAdminPage(HttpSession session, Model model) {
+        // Извлекаем id пользователя из сессии
+        Integer userId = (Integer) session.getAttribute("userId");
+
+        if (userId != null) {
+            // Здесь вы можете использовать userId для получения дополнительной информации о пользователе (например, через PlayerService)
+            Player player = playerService.getPlayerById(userId).orElse(null);
+            model.addAttribute("player", player); // Передаем объект игрока в модель
+        }
+
         return "admin"; // Возвращаем страницу администратора
     }
 
@@ -48,6 +58,14 @@ public class AdminController {
             return "games/admin-game"; // Имя шаблона Thymeleaf
         }
         return "error"; // Шаблон для случая, если игра не найдена
+    }
+
+    @GetMapping("/gameSignUp")
+    public String signUpForGame(@RequestParam("gameId") Integer gameId, Model model) {
+
+        // Ваша логика по почте и подписке на игру с gameId
+
+        return "game-signUp-success";  // Перенаправление на страницу успеха регистрации
     }
 
     @GetMapping("/fields")
