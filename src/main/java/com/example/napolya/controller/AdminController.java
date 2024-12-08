@@ -62,16 +62,17 @@ public class AdminController {
 
     @GetMapping("/gameSignUp")
     public String signUpForGame(@RequestParam("gameId") Integer gameId, HttpSession session) {
-
+        //
         // Извлекаем id пользователя из сессии
         Integer userId = (Integer) session.getAttribute("userId");
 
         if (userId != null) {
             Player player = playerService.findById(userId).orElse(null);
-            //
+
+            return "game-signUp-success"; // Перенаправление на страницу успеха регистрации
         }
 
-        return "game-signUp-success";  // Перенаправление на страницу успеха регистрации
+        return "error"; // Шаблон для случая, если игра не найдена
     }
 
     @GetMapping("/fields")
