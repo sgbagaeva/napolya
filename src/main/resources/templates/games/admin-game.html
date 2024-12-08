@@ -37,9 +37,17 @@
 
     <!-- Блоки управления с ссылкой Записаться на игру -->
     <div class="edit-block">
-        <a th:href="@{/admin/gameSignUp(gameId=${game.id})}" class="btn rectangle-112">Записаться на игру</a>
+        <a th:if="${session.registeredGameId != null and session.registeredGameId == game.id}"
+           th:href="@{/admin/unsubscribe(gameId=${game.id})}"
+           class="btn rectangle-112" style="color: red;">
+            Отписаться от игры
+        </a>
+        <a th:unless="${session.registeredGameId != null and session.registeredGameId == game.id}"
+           th:href="@{/admin/gameSignUp(gameId=${game.id})}"
+           class="btn rectangle-112">
+            Записаться на игру
+        </a>
     </div>
-
 </div>
 </body>
 </html>

@@ -57,6 +57,7 @@ public class AdminController {
         Game game = gameService.findById(gameId).orElse(null);
         if (game != null) {
             model.addAttribute("game", game);
+            // Сохраняем состояние записи на игру в сессии
             return "games/admin-game"; // Имя шаблона Thymeleaf
         }
         return "error"; // Шаблон для случая, если игра не найдена
@@ -64,16 +65,7 @@ public class AdminController {
 
     @GetMapping("/gameSignUp")
     public String signUpForGame(@RequestParam("gameId") Integer gameId, HttpSession session) {
-        //мне нужно, чтобы в этом методе:
-        //Проверялось, что в таблице team в поле game_id было значение, равное gameId
-        //
-        //1. Если такого значения нет, то нужно создать новый объект в таблице team с полями name = "Команда",
-        // captain_id = 1 и game_id = gameId. Затем взять id у этой новой игры и создать новый объект в таблице
-        // player_team со значениями player_id = userId и team_id = id.
-        //
-        //2. Если такое значение есть, то нужно взять id из таблицы team по game_id и создать новый объект
-        // в таблице player_team со значениями player_id = userId и team_id = id. (Не забыть потом закрыть
-        // для пользователя запись на эту игру)
+        // Не забыть потом закрыть для пользователя запись на эту игру
         // Извлекаем id пользователя из сессии
 
         Team existingTeam = teamService.findByGameId(gameId).orElse(null);
@@ -94,15 +86,47 @@ public class AdminController {
         Integer userId = (Integer) session.getAttribute("userId");
 
         if (userId != null) {
+            // Сначала находим игрока
+            Player player = playerService.findById(userId).orElse(null);
+
+            if (player == null) {
+                return "error"; // Или обработка случая, когда игрок не найден
+            }
+
             PlayerTeam playerTeam = new PlayerTeam();
             playerTeam.setPlayerId(userId);
             playerTeam.setTeamId(teamId);
             playerTeamService.save(playerTeam);
+
+            Integer entriesAmount = player.getEntriesAmount();
+            player.setEntriesAmount(entriesAmount + 1);
+            playerService.save(player);
+
+            // Сохраняем состояние записи на игру в сессии
+            session.setAttribute("registeredGameId", gameId);
+
             return "game-signUp-success"; // Перенаправление на страницу успеха регистрации
         }
 
         return "error"; // Шаблон для случая, если игра не найдена
     }
+
+    @GetMapping("/unsubscribe")
+    public String unsubscribe(@RequestParam("gameId") Integer gameId, HttpSession session) {
+        Integer userId = (Integer) session.getAttribute("userId");
+
+        if (userId != null) {
+            // Логика отписки от игры
+
+            // Удаляем атрибут из сессии
+            session.removeAttribute("registeredGameId");
+
+            return "game-unsubscribe-success"; // Страница успеха отписки
+        }
+
+        return "error"; // Шаблон для случая ошибки
+    }
+
 
     @GetMapping("/fields")
     public String listFields(Model model) {

@@ -31,6 +31,9 @@ public class Main implements CommandLineRunner {
     @Autowired
     private TeamService teamService;
 
+    @Autowired
+    private  PlayerTeamService playerTeamService;
+
 
     @Override
     public void run(String... args) throws Exception {
@@ -39,16 +42,17 @@ public class Main implements CommandLineRunner {
 
         // Ваш код для создания и сохранения игрока
         Player player = new Player();
-        player.setName("Ира");
-        player.setSurname("Багаева");
-        player.setEmail("ira@example.com");
-        player.setPassword("pass"); // НИКОГДА не храните пароли в открытом виде!
+        player.setName("Георгий");
+        player.setSurname("Багаев");
+        player.setEmail("gvbagaev@example.com");
+        player.setPassword("papa"); // НИКОГДА не хранить пароли в открытом виде!
         player.setRole("PLAYER");
         player.setRegistrationDate(LocalDateTime.now());
-        player.setRating(0);
+        player.setRating(156);
         player.setEntriesAmount(0);
+        player.setAkkId(479);
 
-        //playerService.savePlayer(player);
+        //playerService.save(player);
         //System.out.println("Player saved: " + player.getName() + " " + player.getSurname());
 
         Game game = new Game();
@@ -83,7 +87,7 @@ public class Main implements CommandLineRunner {
         field.setProviderId(1); // ID поставщика (например, ID организации, которая предоставляет поле)
 
         //fieldService.deleteById(5);
-        System.out.println(gameService.findAll());
+        //System.out.println(gameService.findAll());
     }
 }
 

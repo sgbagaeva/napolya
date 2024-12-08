@@ -17,8 +17,16 @@
 <!-- Верхний заголовок -->
 <div class="header">
     <div class="avatar"></div> <!-- Круглый аватар -->
-    <!-- НЕ РАБОТАЕТ -->
-    <div class="header-title" th:text="${player.name}">Имя</div>
+    <!-- ИМЯ -->
+    <a th:if="${player.akkId != null}"
+       th:href="@{http://www.fpolyana.spb.ru/player.php(id=${player.akkId})}"
+       th:text="${player.name}"
+       class="header-title">
+    </a>
+    <div th:if="${player.akkId == null}"
+          th:text="${player.name}"
+          class="header-title">
+    </div>
     <div class="header-title" th:text="${player.role}">Администратор</div>
     <div class="edit-btn">Редактировать</div>
     <div class="notifications">Уведомления</div>

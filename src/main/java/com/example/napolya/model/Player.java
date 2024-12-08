@@ -49,6 +49,9 @@ public class Player   {
   @Column("entries_amount")
   private Integer entriesAmount = 0;
 
+  @JsonProperty("akk_id")
+  private Integer akkId;
+
   public Player id(Integer id) {
     this.id = id;
     return this;
@@ -58,7 +61,6 @@ public class Player   {
    * Уникальный идентификатор игрока
    * @return id
   */
-
 
   public Integer getId() {
     return id;
@@ -249,6 +251,25 @@ public class Player   {
     this.entriesAmount = entriesAmount;
   }
 
+  public Player akkId(Integer akkId) {
+    this.akkId = akkId;
+    return this;
+  }
+
+  /**
+   * Уникальный идентификатор игрока
+   * @return id
+   */
+
+
+  public Integer getAkkId() {
+    return akkId;
+  }
+
+  public void setAkkId(Integer akkId) {
+    this.akkId = akkId;
+  }
+
 
   @Override
   public boolean equals(Object o) {
@@ -268,12 +289,13 @@ public class Player   {
         Objects.equals(this.registrationDate, player.registrationDate) &&
         Objects.equals(this.rating, player.rating) &&
         //Objects.equals(this.gamesIds, player.gamesIds) &&
-        Objects.equals(this.entriesAmount, player.entriesAmount);
+        Objects.equals(this.entriesAmount, player.entriesAmount) &&
+        Objects.equals(this.akkId, player.akkId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, surname, email, password, role, registrationDate, rating, /*gamesIds,*/ entriesAmount);
+    return Objects.hash(id, name, surname, email, password, role, registrationDate, rating, /*gamesIds,*/ entriesAmount, akkId);
   }
 
   private static <T> int hashCodeNullable(T a) {
@@ -295,6 +317,7 @@ public class Player   {
     sb.append("    rating: ").append(toIndentedString(rating)).append("\n");
     //sb.append("    gamesIds: ").append(toIndentedString(gamesIds)).append("\n");
     sb.append("    entriesAmount: ").append(toIndentedString(entriesAmount)).append("\n");
+    sb.append("    akkId: ").append(toIndentedString(akkId)).append("\n");
     sb.append("}");
     return sb.toString();
   }
