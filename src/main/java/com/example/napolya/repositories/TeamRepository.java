@@ -9,6 +9,8 @@ import java.util.Optional;
 
 @Repository
 public interface TeamRepository extends CrudRepository<Team, Integer> {
-    // Дополнительные методы для Team, если нужно
+    // Метод для поиска команды по названию
     Optional<Team> findByName(String name);
+    // Метод для поиска команды по ID игры (пока что считаем, что 1 команда на 1 игру)
+    Optional<Team> findByGameId(Integer gameId);
 }

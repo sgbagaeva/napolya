@@ -22,11 +22,11 @@ public class Team {
     @JsonProperty("name")
     private String name;
 
-    @JsonProperty("game_id")
-    private Integer gameId;
-
     @JsonProperty("captain_id")
     private Integer captainId;
+
+    @JsonProperty("game_id")
+    private Integer gameId;
 
     public Team id(Integer id) {
         this.id = id;
@@ -64,23 +64,6 @@ public class Team {
         this.name = name;
     }
 
-    public Team gameId(Integer gameId) {
-        this.gameId = gameId;
-        return this;
-    }
-
-    /**
-     * ID игры, к которой принадлежит команда
-     * @return gameId
-     */
-    public Integer getGameId() {
-        return gameId;
-    }
-
-    public void setGameId(Integer gameId) {
-        this.gameId = gameId;
-    }
-
     public Team captainId(Integer captainId) {
         this.captainId = captainId;
         return this;
@@ -96,6 +79,23 @@ public class Team {
 
     public void setCaptainId(Integer captainId) {
         this.captainId = captainId;
+    }
+
+    public Team gameId(Integer gameId) {
+        this.gameId = gameId;
+        return this;
+    }
+
+    /**
+     * ID игры, к которой принадлежит команда
+     * @return gameId
+     */
+    public Integer getGameId() {
+        return gameId;
+    }
+
+    public void setGameId(Integer gameId) {
+        this.gameId = gameId;
     }
 
     @Override

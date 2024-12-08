@@ -1,11 +1,7 @@
 package com.example.napolya.controller;
 
-import com.example.napolya.model.Field;
-import com.example.napolya.model.Game;
-import com.example.napolya.model.Player;
-import com.example.napolya.services.FieldService;
-import com.example.napolya.services.GameService;
-import com.example.napolya.services.PlayerService;
+import com.example.napolya.model.*;
+import com.example.napolya.services.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +21,12 @@ public class AdminController {
 
     @Autowired
     private FieldService fieldService;
+
+    @Autowired
+    private TeamService teamService;
+
+    @Autowired
+    private PlayerTeamService playerTeamService;
 
     @GetMapping()
     public String showAdminPage(HttpSession session, Model model) {
@@ -62,13 +64,40 @@ public class AdminController {
 
     @GetMapping("/gameSignUp")
     public String signUpForGame(@RequestParam("gameId") Integer gameId, HttpSession session) {
+        //мне нужно, чтобы в этом методе:
+        //Проверялось, что в таблице team в поле game_id было значение, равное gameId
         //
+        //1. Если такого значения нет, то нужно создать новый объект в таблице team с полями name = "Команда",
+        // captain_id = 1 и game_id = gameId. Затем взять id у этой новой игры и создать новый объект в таблице
+        // player_team со значениями player_id = userId и team_id = id.
+        //
+        //2. Если такое значение есть, то нужно взять id из таблицы team по game_id и создать новый объект
+        // в таблице player_team со значениями player_id = userId и team_id = id. (Не забыть потом закрыть
+        // для пользователя запись на эту игру)
         // Извлекаем id пользователя из сессии
+
+        Team existingTeam = teamService.findByGameId(gameId).orElse(null);
+        Integer teamId;
+
+        if (existingTeam == null) {
+           Team newTeam = new Team();
+           newTeam.setName("Команда");
+           newTeam.setCaptainId(1);
+           newTeam.setGameId(gameId);
+
+           teamService.save(newTeam);
+           teamId = newTeam.getId();
+        } else {
+            teamId = existingTeam.getId();
+        }
+
         Integer userId = (Integer) session.getAttribute("userId");
 
         if (userId != null) {
-            Player player = playerService.findById(userId).orElse(null);
-
+            PlayerTeam playerTeam = new PlayerTeam();
+            playerTeam.setPlayerId(userId);
+            playerTeam.setTeamId(teamId);
+            playerTeamService.save(playerTeam);
             return "game-signUp-success"; // Перенаправление на страницу успеха регистрации
         }
 

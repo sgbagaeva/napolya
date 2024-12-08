@@ -40,11 +40,8 @@ public class Game   {
   @JsonProperty("field_id")
   private Integer fieldId;
 
-//  @JsonProperty("teams_ids")
-//  private List<Integer> teamsIds = null;
-
-  @JsonProperty("queue_id")
-  private Integer queueId;
+//  @JsonProperty("queue_id")
+//  private Integer queueId;
 
 
   public Game id(Integer id) {
@@ -185,44 +182,17 @@ public class Game   {
     this.fieldId = fieldId;
   }
   /*
-  public Game teamsIds(List<Integer> teamsIds) {
-    this.teamsIds = teamsIds;
-    return this;
-  }
-
-  public Game addTeamsIdsItem(Integer teamsIdsItem) {
-    if (this.teamsIds == null) {
-      this.teamsIds = new ArrayList<>();
-    }
-    this.teamsIds.add(teamsIdsItem);
-    return this;
-  }
-  */
-  /**
-   * id команд, участвующих в игре
-   * @return teamsIds
-  */
-
-  /*
-  public List<Integer> getTeamsIds() {
-    return teamsIds;
-  }
-
-  public void setTeamsIds(List<Integer> teamsIds) {
-    this.teamsIds = teamsIds;
-  }
-  */
   public Game queueId(Integer queueId) {
     this.queueId = queueId;
     return this;
   }
-
+  */
   /**
    * id очереди на игру
    * @return queueId
   */
 
-
+  /*
   public Integer getQueueId() {
     return queueId;
   }
@@ -230,7 +200,7 @@ public class Game   {
   public void setQueueId(Integer queueId) {
     this.queueId = queueId;
   }
-
+  */
 
   @Override
   public boolean equals(Object o) {
@@ -247,14 +217,13 @@ public class Game   {
         Objects.equals(this.startDate, game.startDate) &&
         Objects.equals(this.status, game.status) &&
         Objects.equals(this.creatorId, game.creatorId) &&
-        Objects.equals(this.fieldId, game.fieldId) &&
-        //Objects.equals(this.teamsIds, game.teamsIds) &&
-        Objects.equals(this.queueId, game.queueId);
+        Objects.equals(this.fieldId, game.fieldId);
+        //Objects.equals(this.queueId, game.queueId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, description, startDate, status, creatorId, fieldId, /*teamsIds*/ queueId);
+    return Objects.hash(id, name, description, startDate, status, creatorId, fieldId /*queueId*/);
   }
 
   @Override
@@ -269,8 +238,7 @@ public class Game   {
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    creatorId: ").append(toIndentedString(creatorId)).append("\n");
     sb.append("    fieldId: ").append(toIndentedString(fieldId)).append("\n");
-    //sb.append("    teamsIds: ").append(toIndentedString(teamsIds)).append("\n");
-    sb.append("    queueId: ").append(toIndentedString(queueId)).append("\n");
+    //sb.append("    queueId: ").append(toIndentedString(queueId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

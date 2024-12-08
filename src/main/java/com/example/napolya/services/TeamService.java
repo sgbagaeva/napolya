@@ -18,4 +18,8 @@ public class TeamService extends GenericService<Team, Integer> {
     public Optional<Team> findByName(String name) {
         return teamRepository.findByName(name);
     }
+    // Метод для поиска команды по ID игры (пока что считаем, что 1 команда на 1 игру)
+    public Optional<Team> findByGameId(Integer gameId) {
+        return teamRepository.findByGameId(gameId);
+    }
 }

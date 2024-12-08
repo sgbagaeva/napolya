@@ -7,9 +7,8 @@ import com.example.napolya.model.Player;
 import java.time.LocalDateTime;
 import java.time.Month;
 
-import com.example.napolya.services.FieldService;
-import com.example.napolya.services.GameService;
-import com.example.napolya.services.PlayerService;
+import com.example.napolya.model.Provider;
+import com.example.napolya.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -25,6 +24,13 @@ public class Main implements CommandLineRunner {
 
     @Autowired
     private FieldService fieldService;
+
+    @Autowired
+    private ProviderService providerService;
+
+    @Autowired
+    private TeamService teamService;
+
 
     @Override
     public void run(String... args) throws Exception {
@@ -57,23 +63,27 @@ public class Main implements CommandLineRunner {
         game.setStatus("активная");
         game.setCreatorId(1); // ID создателя игры (например, ID игрока или пользователя)
         game.setFieldId(2); // ID поля (например, ID игрового поля или локации)
-        game.setQueueId(3); // ID очереди (например, ID очереди, если у вас есть система очередей)
+        //game.setQueueId(3); // ID очереди (например, ID очереди, если у вас есть система очередей)
 
         // Сохранение игры
         //gameService.saveGame(game);
 
         //System.out.println("Game saved: " + game.getName() + ", Description: " + game.getDescription());
         //System.out.println(gameService.getAllGames());
+        Provider provider = new Provider();
+        provider.setName("Интерспорт");
+        //providerService.save(provider);
 
         // Создание нового экземпляра класса Field
         Field field = new Field();
 
-        field.setName("Основное футбольное поле"); // Установка имени поля
-        field.setDescription("Широкое футбольное поле с натуральным травяным покрытием, идеальное для игр."); // Установка описания поля
-        field.setLocation("Гатчинский футбольный манеж, улица Новоселов, 8Б, Гатчина"); // Установка местоположения поля
-        field.setProviderId(2); // ID поставщика (например, ID организации, которая предоставляет поле)
+        field.setName("Гатчинский футбольный манеж"); // Установка имени поля
+        field.setDescription("Зимний зал"); // Установка описания поля
+        field.setLocation("улица Новоселов, 8Б, Гатчина"); // Установка местоположения поля
+        field.setProviderId(1); // ID поставщика (например, ID организации, которая предоставляет поле)
 
-        //System.out.println(fieldService.findAll());
+        //fieldService.deleteById(5);
+        System.out.println(gameService.findAll());
     }
 }
 
