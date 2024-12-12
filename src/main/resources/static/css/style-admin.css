@@ -9,7 +9,7 @@ body {
 /* Верхний заголовок */
 .header {
     box-sizing: border-box;
-    position: absolute;
+    position: absolute; /* Фиксированное положение для заголовка */
     width: 100%; /* Ширина на всю страницу */
     height: 237px; /* Высота заголовка */
     top: 0; /* Вместе с верхним краем */
@@ -29,14 +29,12 @@ body {
     width: 100px; /* Ширина аватара */
     height: 100px; /* Высота аватара */
     border-radius: 50%; /* Круглая форма */
-    /* background-image: url('../elements/avatar.jpg'); */
     background-color: #FEF8E7;
     background-size: cover; /* Покрывает весь элемент */
     background-position: center; /* Центрируем изображение */
     margin-right: 10px; /* Отступ справа от аватара */
     border: 2px solid #000000; /* Черная обводка */
 }
-
 
 /* Заголовок в верхней части */
 .header-title {
@@ -52,14 +50,13 @@ body {
 
 /* Боковая панель */
 .sidebar {
-    box-sizing: border-box;
-    position: absolute;
+    box-sizing: border-box; /* Для корректных измерений с padding */
+    position: relative !important; /* Позволяет боковой панели изменять размер в зависимости от содержимого */
     width: 484px; /* Ширина боковой панели */
-    height: calc(100vh - 237px); /* Высота равна высоте окна минус высота заголовка */
+    margin-top: 237px; /* Отступ сверху на высоту заголовка */
     left: 0; /* Отступ от левой стороны */
-    top: 237px; /* Ниже заголовка */
     background: #EDEDED; /* Цвет фона */
-    border-width: 0 1px 1px 0;
+    border-width: 0 1px 1px 0; /* Границы */
     border-style: solid; /* Сплошные границы */
     border-color: #000000; /* Цвет границ */
     border-radius: 0 30px 30px 0; /* Закругление углов справа */
@@ -68,17 +65,17 @@ body {
 
 /* Элементы боковой панели */
 .sidebar-item {
-    text-decoration: none;
+    text-decoration: none; /* Убирает подчеркивание текстов ссылок */
     font-size: 24px; /* Размер шрифта */
     color: #000000; /* Цвет текста */
-    padding: 50px 0;
+    padding: 10px 0; /* Внутренние отступы для элементов */
 }
 
 /* Горизонтальная линия разделения */
 .sidebar-divider {
-    border: none; /* Убираем стандартные границы */
+    border: none; /* Убирает стандартные границы */
     border-top: 1px solid #000000; /* Добавляем черную линию сверху */
-    margin: 50px 0; /* Отступы сверху и снизу */
+    margin: 10px 0; /* Отступы сверху и снизу */
 }
 
 .sidebar-item.active {

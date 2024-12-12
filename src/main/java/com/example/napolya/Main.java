@@ -4,6 +4,11 @@ import com.example.napolya.model.Field;
 import com.example.napolya.model.Game;
 import com.example.napolya.model.Player;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.Month;
 
@@ -88,6 +93,48 @@ public class Main implements CommandLineRunner {
 
         //fieldService.deleteById(5);
         //System.out.println(gameService.findAll());
+
+        String jsonInputString = "{\"id\": 1}";
+        System.out.println("Json-input: " + jsonInputString);
+        //sendPostRequest(jsonInputString);
+
+    }
+
+    public void sendPostRequest(String jsonInputString) throws Exception {
+        URL url = new URL("http://fpolyana.spb.ru/enroll/getPlayerData");
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+        // Настройка соединения
+        connection.setRequestMethod("POST");
+        connection.setRequestProperty("Content-Type", "application/json; utf-8");
+        connection.setRequestProperty("Accept", "application/json");
+        connection.setDoOutput(true);
+
+        // Отправка JSON в теле запроса
+        try (OutputStream os = connection.getOutputStream()) {
+            byte[] input = jsonInputString.getBytes("utf-8");
+            os.write(input, 0, input.length);
+        }
+
+        // Получение кода ответа
+        int responseCode = connection.getResponseCode();
+        System.out.println("Response Code : " + responseCode);
+
+        // Чтение ответа от сервера
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"))) {
+            StringBuilder response = new StringBuilder();
+            String responseLine;
+
+            while ((responseLine = reader.readLine()) != null) {
+                response.append(responseLine.trim());
+            }
+
+            // Вывод ответа
+            System.out.println("Response Body: " + response.toString());
+        } catch (Exception e) {
+            // Обработка ошибки, если не удалось прочитать ответ
+            System.out.println("Error reading response: " + e.getMessage());
+        }
     }
 }
 

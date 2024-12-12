@@ -5,27 +5,38 @@ import com.example.napolya.repositories.PlayerRepository;
 import com.example.napolya.services.PlayerService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Controller
+@RequestMapping("/players")
 public class PlayerController {
 
     @Autowired
     private PlayerService playerService;
 
-    @GetMapping("/") // Главная страница
-    public String index() {
-        return "index"; // Возвращает файл index.html
+    @GetMapping
+    public ResponseEntity<List<String>> getPlayerNames() {
+        List<String> playerNames = playerService.findAll() // Получаем список игроков
+                .stream()
+                .map(Player::getName) // Извлекаем имена игроков
+                .collect(Collectors.toList()); // Собираем их в список
+
+        return ResponseEntity.ok(playerNames); // Возвращаем список имён с кодом 200
     }
 
-    @GetMapping("/registration")
+    @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("player", new Player()); // Создание нового объекта Player
         return "registration";
     }
 
-    @PostMapping("/registration")
+    @PostMapping("/register")
     public String registerPlayer(@ModelAttribute Player player, Model model) {
         // Проверка на существующего пользователя
         if (playerService.findByEmail(player.getEmail()).isPresent()) {
