@@ -17,7 +17,7 @@
 <div class="registration-container">
     <h1 class="registration-title">Вход</h1>
 
-    <form class="registration-form" action="#" th:action="@{/players/login}" method="post" th:object="${player}">
+    <form class="registration-form" action="#" th:action="@{/login}" method="post" th:object="${user}">
         <div class="input-group">
             <label for="name" class="input-label">Введите имя</label>
             <input type="text" id="name" class="input-field" th:field="*{name}" required>
@@ -28,7 +28,7 @@
             <!-- <span class="password-eye" onclick="togglePasswordVisibility()">👁️</span> -->
         </div>
         <button type="submit" class="submit-button">Войти</button>
-        <p class="login-prompt">Ещё нет аккаунта? <a th:href="@{/players/register}" class="login-link">Зарегистрироваться</a></p>
+        <p class="login-prompt">Ещё нет аккаунта? <a th:href="@{/register}" class="login-link">Зарегистрироваться</a></p>
     </form>
     <div th:if="${errorMessage}" style="color:red;">[[${errorMessage}]]</div>
 </div>

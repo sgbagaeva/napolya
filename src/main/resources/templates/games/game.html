@@ -1,53 +1,54 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../static/css/style-game.css">
-
+    <link rel="stylesheet" th:href="@{/css/style-game.css}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="../../static/js/script.js"></script>
-
+    <script th:src="@{/js/manage-game.js}"></script>
     <title>Макет Игры</title>
 </head>
 
 <body>
-    <div class="game-layout">
+<div class="game-layout">
+    <button class="back-btn" id="backButton" onclick="goBack()">← Назад</button>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 
-        <!-- Кнопка "Назад" размещается слева -->
-        <button class="back-btn">← Назад</button>
+    <!-- Заголовок игры с использованием данных из модели -->
+    <div class="game-title" th:text="${game.name}">Название игры</div>
 
-        <!-- Заголовок игры также расположен слева -->
-        <div class="game-title">Игра...</div>
-
-        <div class="content-container">
-            <div class="line-15"></div>
-            <div class="description-block">
-                Здесь будет текст описания игры.
-            </div>
-        </div>
-
-        <div class="additional-info-block">Блок с дополнительной информацией</div>
-
-        <div class="game-images">
-            <div class="game-image" style="background-image: url('14058.jpg');"></div>
-            <div class="game-image" style="background-image: url('28378.jpg');"></div>
-            <div class="game-image" style="background-image: url('27355.jpg');"></div>
+    <div class="content-container">
+<!--        <div class="line-15"></div>-->
+        <div class="description-block">
+            <!-- Описание игры также со значением из модели -->
+            <p th:text="${game.description}">Описание игры...</p>
         </div>
     </div>
 
-    <script>
-        $(document).ready(function () {
-            var descriptionHeight = $('.description-block').outerHeight();
-            $('.line-15').height(descriptionHeight);
-        });
-    </script>
-</body>
+    <div class="additional-info-block"></div>
 
+    <!-- Блоки управления с ссылкой Записаться на игру -->
+    <div class="edit-block">
+        <a th:if="${session.registeredGameId != null and session.registeredGameId == game.id}"
+           th:href="@{/player/unsubscribe/{id}(id=${game.id})}"
+           class="btn rectangle-112" style="color: red;">
+            Отписаться от игры
+        </a>
+        <a th:unless="${session.registeredGameId != null and session.registeredGameId == game.id}"
+           th:href="@{/player/gameSignUp/{id}(id=${game.id})}"
+           class="btn rectangle-112">
+            Записаться на игру
+        </a>
+    </div>
+</div>
+</body>
 </html>
 

@@ -1,86 +1,63 @@
 package com.example.napolya.controller;
 
-import com.example.napolya.model.Player;
-import com.example.napolya.repositories.PlayerRepository;
-import com.example.napolya.services.PlayerService;
+import com.example.napolya.model.*;
+import com.example.napolya.services.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("/players")
+@RequestMapping("/player")
 public class PlayerController {
 
     @Autowired
-    private PlayerService playerService;
+    private UserService userService;
+    @Autowired
+    private GameService gameService;
 
-    @GetMapping
+    @Autowired
+    private FieldService fieldService;
+
+    @Autowired
+    private TeamService teamService;
+
+    @Autowired
+    private PlayerTeamService playerTeamService;
+
+    @GetMapping("/list")
     public ResponseEntity<List<String>> getPlayerNames() {
-        List<String> playerNames = playerService.findAll() // Получаем список игроков
+        List<String> playerNames = userService.findAll() // Получаем список пользователей
                 .stream()
-                .map(Player::getName) // Извлекаем имена игроков
+                .filter(user -> "PLAYER".equals(user.getRole())) // Фильтрация только для пользователей с ролью PLAYER
+                .map(User::getName) // Извлекаем имена администраторов
                 .collect(Collectors.toList()); // Собираем их в список
 
         return ResponseEntity.ok(playerNames); // Возвращаем список имён с кодом 200
     }
 
-    @GetMapping("/register")
-    public String showRegistrationForm(Model model) {
-        model.addAttribute("player", new Player()); // Создание нового объекта Player
-        return "registration";
-    }
+    @GetMapping()
+    public String showPlayerPage(HttpSession session, Model model) {
+        // Извлекаем id пользователя из сессии
+        Integer userId = (Integer) session.getAttribute("userId");
 
-    @PostMapping("/register")
-    public String registerPlayer(@ModelAttribute Player player, Model model) {
-        // Проверка на существующего пользователя
-        if (playerService.findByEmail(player.getEmail()).isPresent()) {
-            model.addAttribute("errorMessage", "Ошибка: Пользователь с таким email уже существует.");
-            return "registration"; // Возвращение на страницу регистрации с сообщением об ошибке
+        if (userId != null) {
+            User user = userService.findById(userId).orElse(null);
+            model.addAttribute("user", user); // Передаем объект в модель
         }
 
-        // Хэширование пароля (для безопасности)
-
-        // Сохранение нового игрока в БД
-        playerService.save(player);
-
-        model.addAttribute("adminName", player.getName()); // Сохраняем имя администратора в модели
-        return "redirect:/admin"; // Перенаправление на страницу администратора после успешной регистрации
+        return "playerIndex"; // Возвращаем главную страницу игрока
     }
 
-    @GetMapping("/login")
-    public String showLoginForm(Model model) {
-        model.addAttribute("player", new Player()); // Создаем новый объект Player в модели
-        return "login"; // Возвращаем страницу входа
-    }
-
-
-    @PostMapping("/login")
-    public String loginPlayer(@ModelAttribute Player player, HttpSession session, Model model) {
-        // Проверка на существующего пользователя
-        Player existingPlayer = playerService.findByName(player.getName()).orElse(null);
-// ВАЖНО - добавить обработку при совпадении имён
-        if (existingPlayer == null || !existingPlayer.getPassword().equals(player.getPassword())) {
-            model.addAttribute("errorMessage", "Ошибка: Неверное имя пользователя или пароль");
-            return "login"; // Возвращаем на страницу логина с сообщением об ошибке
-        }
-
-        // Сохраняем id пользователя в сессии
-        session.setAttribute("userId", existingPlayer.getId());
-
-        return "redirect:/admin"; // Перенаправление на главную страницу пользователя после успешной регистрации
-    }
-
-    /*
-    @GetMapping("/logout")
-    public String logout() {
-        return "redirect:/login"; // Перенаправление на страницу логина после выхода
-    }
-    */
 }
+
+
 

@@ -12,8 +12,8 @@ import java.util.Objects;
 /**
  * Player
  */
-@Table(name = "player")
-public class Player   {
+@Table(name = "user")
+public class User {
   @Id
   @JsonProperty("id")
   private Integer id;
@@ -31,7 +31,7 @@ public class Player   {
   private String password;
 
   @JsonProperty("role")
-  private String role = "ADMIN";
+  private String role = "PLAYER";
 
   @JsonProperty("registration_date")
   //@Column("registration_date")
@@ -52,7 +52,7 @@ public class Player   {
   @JsonProperty("akk_id")
   private Integer akkId;
 
-  public Player id(Integer id) {
+  public User id(Integer id) {
     this.id = id;
     return this;
   }
@@ -70,7 +70,7 @@ public class Player   {
     this.id = id;
   }
 
-  public Player name(String name) {
+  public User name(String name) {
     this.name = name;
     return this;
   }
@@ -89,7 +89,7 @@ public class Player   {
     this.name = name;
   }
 
-  public Player surname(String surname) {
+  public User surname(String surname) {
     this.surname = surname;
     return this;
   }
@@ -108,7 +108,7 @@ public class Player   {
     this.surname = surname;
   }
 
-  public Player email(String email) {
+  public User email(String email) {
     this.email = email;
     return this;
   }
@@ -126,7 +126,7 @@ public class Player   {
     this.email = email;
   }
 
-  public Player password(String password) {
+  public User password(String password) {
     this.password = password;
     return this;
   }
@@ -145,7 +145,7 @@ public class Player   {
     this.password = password;
   }
 
-  public Player role(String role) {
+  public User role(String role) {
     this.role = role;
     return this;
   }
@@ -164,7 +164,7 @@ public class Player   {
     this.role = role;
   }
 
-  public Player registrationDate(LocalDateTime registrationDate) {
+  public User registrationDate(LocalDateTime registrationDate) {
     this.registrationDate = registrationDate;
     return this;
   }
@@ -182,7 +182,7 @@ public class Player   {
     this.registrationDate = registrationDate;
   }
 
-  public Player rating(Integer rating) {
+  public User rating(Integer rating) {
     this.rating = rating;
     return this;
   }
@@ -202,12 +202,12 @@ public class Player   {
   }
 
   /*
-  public Player gamesIds(List<Integer> gamesIds) {
+  public User gamesIds(List<Integer> gamesIds) {
     this.gamesIds = gamesIds;
     return this;
   }
 
-  public Player addGamesIdsItem(Integer gamesIdsItem) {
+  public User addGamesIdsItem(Integer gamesIdsItem) {
     if (this.gamesIds == null) {
       this.gamesIds = new ArrayList<>();
     }
@@ -232,7 +232,7 @@ public class Player   {
   }
   */
 
-  public Player entriesAmount(Integer entriesAmount) {
+  public User entriesAmount(Integer entriesAmount) {
     this.entriesAmount = entriesAmount;
     return this;
   }
@@ -251,7 +251,7 @@ public class Player   {
     this.entriesAmount = entriesAmount;
   }
 
-  public Player akkId(Integer akkId) {
+  public User akkId(Integer akkId) {
     this.akkId = akkId;
     return this;
   }
@@ -279,18 +279,18 @@ public class Player   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Player player = (Player) o;
-    return Objects.equals(this.id, player.id) &&
-        Objects.equals(this.name, player.name) &&
-        Objects.equals(this.surname, player.surname) &&
-        Objects.equals(this.email, player.email) &&
-        Objects.equals(this.password, player.password) &&
-        Objects.equals(this.role, player.role) &&
-        Objects.equals(this.registrationDate, player.registrationDate) &&
-        Objects.equals(this.rating, player.rating) &&
+    User user = (User) o;
+    return Objects.equals(this.id, user.id) &&
+        Objects.equals(this.name, user.name) &&
+        Objects.equals(this.surname, user.surname) &&
+        Objects.equals(this.email, user.email) &&
+        Objects.equals(this.password, user.password) &&
+        Objects.equals(this.role, user.role) &&
+        Objects.equals(this.registrationDate, user.registrationDate) &&
+        Objects.equals(this.rating, user.rating) &&
         //Objects.equals(this.gamesIds, player.gamesIds) &&
-        Objects.equals(this.entriesAmount, player.entriesAmount) &&
-        Objects.equals(this.akkId, player.akkId);
+        Objects.equals(this.entriesAmount, user.entriesAmount) &&
+        Objects.equals(this.akkId, user.akkId);
   }
 
   @Override

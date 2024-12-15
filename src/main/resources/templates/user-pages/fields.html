@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style-content.css}"> <!-- Используем Thymeleaf для подключения CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script th:src="@{/js/script.js}"></script> <!-- Используем Thymeleaf для подключения JS -->
+    <title>Управление полями</title>
+</head>
+<body>
+<!-- Основной контент -->
+<div class="main-content" id="main-content">
+    <div class="photo-section">
+        <h2 class="photo-title">Управление полями</h2>
+        <ul class="photo-list">
+            <li class="photo-item" th:each="field : ${fields}">
+                <a th:href="@{/provider-field/{id}(id=${field.id})}">
+                    <img th:attr="src=@{'/elements/field-images/' + ${field.id} + '.png'},
+                          title='Изображение поля с ID: ' + ${field.id},
+                          alt='Изображение поля с ID: ' + ${field.id}"
+                         class="photo-image" />
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</div>
+</body>
+</html>
+
+
+

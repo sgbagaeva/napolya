@@ -1,9 +1,6 @@
 package com.example.napolya;
 
-import com.example.napolya.model.Field;
-import com.example.napolya.model.Game;
-import com.example.napolya.model.Player;
-
+import com.example.napolya.model.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -12,7 +9,6 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.Month;
 
-import com.example.napolya.model.Provider;
 import com.example.napolya.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -22,7 +18,7 @@ import org.springframework.stereotype.Component;
 public class Main implements CommandLineRunner {
 
     @Autowired
-    private PlayerService playerService;
+    private UserService userService;
 
     @Autowired
     private GameService gameService;
@@ -46,18 +42,19 @@ public class Main implements CommandLineRunner {
         System.out.println("Приложение запустилось");
 
         // Ваш код для создания и сохранения игрока
-        Player player = new Player();
-        player.setName("Георгий");
-        player.setSurname("Багаев");
-        player.setEmail("gvbagaev@example.com");
-        player.setPassword("papa"); // НИКОГДА не хранить пароли в открытом виде!
-        player.setRole("PLAYER");
-        player.setRegistrationDate(LocalDateTime.now());
-        player.setRating(156);
-        player.setEntriesAmount(0);
-        player.setAkkId(479);
+        User user = new User();
+        user.setId(12);
+        user.setName("Юрий");
+        user.setSurname("Иванов");
+        user.setEmail("yuri@example.com");
+        user.setPassword("polyana"); // НИКОГДА не хранить пароли в открытом виде!
+        user.setRole("PROVIDER");
+        user.setRegistrationDate(LocalDateTime.now());
+        user.setRating(-14);
+        user.setEntriesAmount(0);
+        user.setAkkId(1);
 
-        //playerService.save(player);
+        //userService.save(user);
         //System.out.println("Player saved: " + player.getName() + " " + player.getSurname());
 
         Game game = new Game();
@@ -79,6 +76,13 @@ public class Main implements CommandLineRunner {
 
         //System.out.println("Game saved: " + game.getName() + ", Description: " + game.getDescription());
         //System.out.println(gameService.getAllGames());
+
+        Team team = new Team();
+        team.setName("Супер пупер команда");
+        team.setCaptainId(9);
+        team.setGameId(4);
+        //teamService.save(team);
+
         Provider provider = new Provider();
         provider.setName("Интерспорт");
         //providerService.save(provider);

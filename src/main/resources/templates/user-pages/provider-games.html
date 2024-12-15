@@ -18,7 +18,7 @@
         <h2 class="photo-title">Управление играми</h2>
         <ul class="photo-list">
             <li class="photo-item" th:each="game : ${games}">
-                <a th:href="@{/admin/games/{id}(id=${game.id})}">
+                <a th:href="@{/provider/games/{id}(id=${game.id})}">
                     <img th:attr="src=@{'/elements/game-images/' + ${game.id} + '.png'},
                           title='Изображение игры с ID: ' + ${game.id},
                           alt='Изображение игры с ID: ' + ${game.id}"

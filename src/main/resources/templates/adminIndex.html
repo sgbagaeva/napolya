@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style-user.css}"> <!-- Thymeleaf для подключения CSS-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script th:src="@{/js/script.js}"></script> <!-- Используем Thymeleaf для подключения JS -->
+    <title>Главная страница администратора</title>
+</head>
+
+<body>
+<!-- Верхний заголовок -->
+<div class="header">
+    <div class="avatar"></div> <!-- Круглый аватар -->
+    <!-- ИМЯ -->
+    <a th:if="${user.akkId != null}"
+       th:href="@{http://www.fpolyana.spb.ru/player.php(id=${user.akkId})}"
+       th:text="${user.name}"
+       class="header-title">
+    </a>
+    <div th:if="${user.akkId == null}"
+          th:text="${user.name}"
+          class="header-title">
+    </div>
+    <div class="header-title" th:text="${user.role}">Администратор</div>
+    <div class="edit-btn">Редактировать</div>
+    <div class="notifications">Уведомления</div>
+</div>
+
+<!-- Основная область работы -->
+<div class="sidebar">
+    <p></p>
+    <a th:href="@{/admin/games}" class="sidebar-item">Управление играми</a>
+    <hr class="sidebar-divider">
+    <a th:href="@{/admin/fields}" class="sidebar-item">Управление полями</a>
+    <hr class="sidebar-divider">
+    <a th:href="@{/admin/manage-players}" class="sidebar-item">Управление игроками</a>
+    <hr class="sidebar-divider">
+    <a th:href="@{/admin/contacts}" class="sidebar-item">Контакты</a>
+    <hr class="sidebar-divider">
+    <a th:href="@{/admin/profile}" class="sidebar-item">Профиль</a>
+</div>
+
+<!-- Основной контент -->
+<div class="main-content" id="main-content">
+    <!-- Здесь будет загружено содержимое других страниц -->
+</div>
+</body>
+</html>
+
+

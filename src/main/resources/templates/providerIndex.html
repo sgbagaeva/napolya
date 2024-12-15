@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/css/style-admin.css}"> <!-- Thymeleaf для подключения CSS-->
+    <link rel="stylesheet" th:href="@{/css/style-user.css}"> <!-- Thymeleaf для подключения CSS-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script th:src="@{/js/script.js}"></script> <!-- Используем Thymeleaf для подключения JS -->
-    <title>Главная страница администратора</title>
+    <title>Главная страница провайдера</title>
 </head>
 
 <body>
@@ -18,16 +18,16 @@
 <div class="header">
     <div class="avatar"></div> <!-- Круглый аватар -->
     <!-- ИМЯ -->
-    <a th:if="${player.akkId != null}"
-       th:href="@{http://www.fpolyana.spb.ru/player.php(id=${player.akkId})}"
-       th:text="${player.name}"
+    <a th:if="${user.akkId != null}"
+       th:href="@{http://www.fpolyana.spb.ru/player.php(id=${user.akkId})}"
+       th:text="${user.name}"
        class="header-title">
     </a>
-    <div th:if="${player.akkId == null}"
-          th:text="${player.name}"
+    <div th:if="${user.akkId == null}"
+          th:text="${user.name}"
           class="header-title">
     </div>
-    <div class="header-title" th:text="${player.role}">Администратор</div>
+    <div class="header-title" th:text="${user.role}">Провайдер</div>
     <div class="edit-btn">Редактировать</div>
     <div class="notifications">Уведомления</div>
 </div>
@@ -35,20 +35,21 @@
 <!-- Основная область работы -->
 <div class="sidebar">
     <p></p>
-    <a th:href="@{/admin/games}" class="sidebar-item">Управление играми</a>
+    <a th:href="@{/provider/games}" class="sidebar-item">Управление играми</a>
     <hr class="sidebar-divider">
-    <a th:href="@{/admin/fields}" class="sidebar-item">Управление полями</a>
+    <a th:href="@{/provider/fields}" class="sidebar-item">Управление полями</a>
     <hr class="sidebar-divider">
-    <a th:href="@{/admin/manage-players}" class="sidebar-item">Управление игроками</a>
+    <a th:href="@{/provider/manage-players}" class="sidebar-item">Управление игроками</a>
     <hr class="sidebar-divider">
-    <a th:href="@{/admin/my-games}" class="sidebar-item">Мои игры</a>
+    <a th:href="@{/provider/games}" class="sidebar-item">Доступные игры</a>
     <hr class="sidebar-divider">
-    <a th:href="@{/admin/fields}" class="sidebar-item">Поля</a>
+    <a th:href="@{/provider/my-games}" class="sidebar-item">Мои игры</a>
     <hr class="sidebar-divider">
-    <a th:href="@{/admin/contacts}" class="sidebar-item">Контакты</a>
+    <a th:href="@{/provider/fields}" class="sidebar-item">Поля</a>
     <hr class="sidebar-divider">
-    <a th:href="@{/admin/profile}" class="sidebar-item">Профиль</a>
+    <a th:href="@{/provider/contacts}" class="sidebar-item">Контакты</a>
     <hr class="sidebar-divider">
+    <a th:href="@{/provider/profile}" class="sidebar-item">Профиль</a>
 </div>
 
 <!-- Основной контент -->
